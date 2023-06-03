@@ -18,4 +18,4 @@ texput.log
 template.pdf
 _minted-template
 node_modules
-DS_Store
+.DS_Store
