@@ -30,15 +30,15 @@
 \newenvironment{beweis}{\begin{proof}[Beweis]}{\end{proof}}
 \usepackage[hyphens]{url}
 \usepackage{hyperref}
+\usepackage{float}
+
 
 %----------------------------------------------------------------------------------------
 %	BIB.-Datei und Quellenverwaltung
 %----------------------------------------------------------------------------------------
 \usepackage[backend=bibtex, style=numeric]{biblatex}
-\addbibresource{template.bib}
-%\usepackage{natbib} % use natbib for references 
+\addbibresource{references.bib}
 %----------------------------------------------------------------------------------------
-\usepackage{blindtext} % Package to generate dummy text throughout this template 
 
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
@@ -64,6 +64,8 @@
 %\fancyfoot[RO,LE]{\thepage} % Custom footer text
 
 \usepackage{titling} % Customizing the title section
+\usepackage{datetime2}
+
 
 %----------------------------------------------------------------------------------------
 %	Listings
@@ -111,7 +113,6 @@
 \begin{document}
 
 % Titelseite
-% \pagestyle{empty}       % keine Seitennummer
 \begin{titlepage}
 \begin{center}
 \includegraphics{HTW_Berlin_Logo_farbig.jpg}
@@ -119,20 +120,21 @@
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
-\textit{\large Titel der Abschlussarbeit}
+\textit{\large Design \& Implementation of a Health and Activity Monitor Application using a Wearable Bluetooth Low Energy Sensor
+}
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
-Abschlussarbeit 
+Final Thesis 
 \linebreak[4]
 \linebreak[4]
-zur Erlangung des akademischen Grades: 
+submitted for the academic degree: 
 \linebreak[4]
 \linebreak[4]
 \textbf{Bachelor of Science (B.Sc.)}
 \linebreak[4]
 \linebreak[4]
-an der
+at
 \linebreak[4]
 \linebreak[4]
 Hochschule f\"ur Technik und Wirtschaft (HTW) Berlin
@@ -143,33 +145,21 @@ Studiengang \textit{Angewandte Informatik}
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
-1. Gutachter\_in: Titel akademischer Grad Vorname Nachname\linebreak[4]
-2. Gutachter\_in: Titel akademischer Grad Vorname Nachname\linebreak[4]
+1. Supervisor: Prof. Dr. -Ing Hendrik Gaertner\linebreak[4]
+2. Supervisor: M.Sc. Ingo Wiederoder\linebreak[4]
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
-Eingereicht von Vorname Nachname [Matrikelnr.]
+Submitted by Nathanael Isaac Hermanto [s0570619]
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
 \linebreak[4]
-Datum
+Last updated on: \DTMnow
 
 \end{center}
 \end{titlepage}
-\newpage    % Seitenwechsel
-
-\thispagestyle{empty}       % keine Seitennummer
-% vertikaler Leerraum
-\vspace*{2.2cm}
-\noindent %kein Einzug
-{\Huge Danksagung}\\
-\vspace*{1.6cm} \\
-
-% Kopfzeilen (automatisch erzeugt)
-%\pagestyle{headings}
-[Text der Danksagung]
 
 % Seite mit Abstracts
 \newpage
@@ -182,9 +172,7 @@ Datum
 
 
 \clearpage
-%Seite 1
 \pagenumbering{roman}% Seitennummerierung "roemisch"
-%\setcounter{page}{1} 
 
 \tableofcontents  
 
@@ -223,18 +211,6 @@ Datum
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 
-
-% \bibliographystyle{apalike}
-% \bibliographystyle{ksfh_nat} % ein anderer Stil
-% \bibliography{science} 
-
-%\begin{thebibliography}{XX}
-%\bibitem[Bielecki, Rutkowski(2002)]{bielecki02}T. Bielecki, M. Rutkowski, Credit Risk: Modeling, Valuation and Hedging, Springer (2002).
-%\bibitem[Jarrow, Turnbull(1995)]{jarrow95} R.A. Jarrow, S. Turnbull, Pricing derivatives on financial securities subject to credit risk, Journal of Finance, 50:1 (1995) 53--85.
-%\bibitem[Marshall, Olkin(1967)]{marshall67} A.W. Marshall, I. Olkin, A multivariate exponential distribution, Journal of the American Statistical Association, 62 (1967), pp. 30--44.
-%\bibitem[Sch\"onbucher(2003)]{schoenbucher03} P.J. Sch\"onbucher, Credit Derivatives Pricing Models, Wiley (2003).
-%\end{thebibliography}
-
 \printbibliography[
 heading=bibintoc,
 title={Bibliography}
@@ -263,9 +239,7 @@ title={Bibliography}
 
 
 \newpage
-% Letzte Seite
 \thispagestyle{empty}       % keine Seitennummer
-%\vspace*{18cm}
 \noindent
 
 \section*{Eidesstattliche Versicherung}

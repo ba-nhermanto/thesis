@@ -1,0 +1,56 @@
+\section{Heart Rate Monitoring}
+In the scope of this project, by monitoring heart rate during physical activity or during their daily lives, people can ensure they stay within their heart rate zones for optimal fitness or safety.
+Additionally, heart rate monitoring enables us to predict energy expenditure during exercise and irregularities in our cardiovascular functions.
+
+\subsection{Physical Activity Intensity}
+According to the Physical Activity Guidelines Advisory Committee Scientific Report \autocite{healthgov2008}, intensity is one of the most important aspect in determining the appropriate level of physical activity.
+Increasing the intensity of an activity can result in positive adaptations but it can also increase the risk of injury. 
+
+The physical intensity can be expressed in either absolute or relative terms but in the scope of this project it is more logical to use relative terms as it does not disregard an individual's physiological capabilities. 
+Relative intensity can be classified into categories such as very light, light, moderate, hard, very hard (Table 2.1)
+
+\begin{table}[htbp]
+    \centering
+    \label{tab:intensity}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      \textbf{Intensity} & \textbf{Percent HRmax} \\
+      \hline
+      Very Light & $<50$ \\
+      Light & $50-63$ \\
+      Moderate & $64-76$ \\
+      Hard & $77-93$ \\
+      Very Hard & $\geq94$ \\
+      Maximal & $100$ \\
+      \hline
+    \end{tabular}
+    \caption{Relative Intensity \autocite{healthgov2008}}
+  \end{table}
+  
+It is of utmost importance to correctly calculate the maximum heart rate (HRMax) to accurately measure physical activity intensity. In the HUNT Fitness Study \autocite{nes2013maximal}, a test was conducted to measure the maximal heart rate among 3320 healthy adults aged between 19 to 89 and based on the test, a formula to calculate the maximum heart rate was developed: 
+
+\begin{center}
+\(HRMax = 211 - 0.64 \times \text{{age}}\)
+\end{center}
+        
+\subsection{Calculating the Energy Expenditure from Physical Activity}
+In the research conducted for Prediction of energy expenditure from heart rate monitoring during submaximal exercise \autocite{keytel2005energy}, it is concluded that it is possible to estimate physical activity energy expenditure from heart rate in regularly exercising individuals, taking into consideration adjusted factors such as gender, heart rate, weight, and age. The research also developed an equation to estimate energy expenditure:
+
+\textbf{MEN:}
+\begin{center}
+    \(CB = T \times (0.6309 \times H  -  0.1988 \times W  +  0.2017 \times A  -  55.0960) \div 4.184 \)
+\end{center}
+
+\textbf{WOMEN:}
+\begin{center}
+    \(CB = T \times (0.4472 \times H  -  0.1263 \times W  +  0.074 \times A  -  20.4022) \div 4.184 \)
+\end{center}
+
+where:
+\begin{itemize}
+    \item CB - Number of calories burned in kcal
+    \item T - Duration of exercise in minutes
+    \item H - Average heart rate in beats per minute
+    \item W - Weight in kilograms
+    \item A - Age in years
+\end{itemize}
