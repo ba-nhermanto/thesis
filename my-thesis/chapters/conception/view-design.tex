@@ -101,7 +101,7 @@ To fulfill the requirements, the \emph{UserFragment} must facilitate adding a ne
 As a result, the following sequence of operations is created to support the functionality to add a new user and to update their data.
 
 \begin{enumerate}
-    \item A button to add new user or update user is pressed.
+    \item A button to add new user or a button to update user is pressed.
     \item User data is retrieved from the input and validated.
     \item User data sent to \emph{UserViewModel} to be persisted in the database.
     \item Saved user is returned
@@ -112,8 +112,29 @@ As a result, the following sequence of operations is created to support the func
     \centering
     \includegraphics[width=0.5\textwidth]{diagrams/create-user-seq.drawio.png}
     \caption{UserFragment add new user sequence diagram}
-    \label{fig:userfragment_add new user}
+    \label{fig:userfragment_add_new_user}
 \end{figure}
 
 To meet the requirement of deleting user data, the UserFragment is designed to handle this functionality. 
 To support this functionality, the following sequence of operation is implemented:
+
+\begin{enumerate}
+    \item A button to delete user is pressed.
+    \item A request to delete user is sent to \emph{UserViewModel}.
+    \item The \emph{UserViewModel} validates if there are running \emph{ConnectionService/ExerciseService/ActivityService}.
+    \item If the validation passed, the user will be deleted.
+    \item The UI is updated, if there are still users left, the \emph{UserFragment} displays the next user, otherwise it will show nothing.
+\end{enumerate}
+
+Alt sequence:
+\begin{enumerate}[start=4]
+    \item If the validation failed, the user will not be deleted and instead the \emph{UserFragment} notifies the user about the running services.
+\end{enumerate}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{diagrams/delete-user-frag-seq.drawio.png}
+    \caption{UserFragment delete user sequence diagram}
+    \label{fig:userfragment_delete_user}
+\end{figure}
