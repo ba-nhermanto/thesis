@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-07-08T19:23:22.242Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="96Mamf0xvsAyeykHwSLb" version="21.6.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-07-08T19:24:57.632Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="h2rBo6kYyqHIPpt-TT7v" version="21.6.1" type="github">
   <diagram name="Page-1" id="DZ5VbVZG-MyMFZXt6MTs">
     <mxGraphModel dx="2074" dy="1078" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -10,12 +10,12 @@
         <mxCell id="O7znUG1SWmAurwfOPOOh-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="O7znUG1SWmAurwfOPOOh-1">
           <mxGeometry x="45" y="70" width="10" height="690" as="geometry" />
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-3" value="start exercise" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="O7znUG1SWmAurwfOPOOh-1" target="O7znUG1SWmAurwfOPOOh-2">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-3" value="1. start exercise" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="O7znUG1SWmAurwfOPOOh-1" target="O7znUG1SWmAurwfOPOOh-2">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-30" y="70" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-46" value="update UI" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="O7znUG1SWmAurwfOPOOh-1">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-46" value="6. update UI" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="O7znUG1SWmAurwfOPOOh-1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="55" y="384" as="sourcePoint" />
             <Array as="points">
@@ -24,7 +24,7 @@
             <mxPoint x="60" y="414" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-7" value="start exercise service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" target="O7znUG1SWmAurwfOPOOh-12">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-7" value="2. start exercise service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" target="O7znUG1SWmAurwfOPOOh-12">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="115" y="190" as="sourcePoint" />
             <Array as="points">
@@ -49,7 +49,7 @@
         <mxCell id="O7znUG1SWmAurwfOPOOh-30" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="O7znUG1SWmAurwfOPOOh-21">
           <mxGeometry x="45" y="160" width="10" height="440" as="geometry" />
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-40" value="start service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="O7znUG1SWmAurwfOPOOh-13" target="O7znUG1SWmAurwfOPOOh-21">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-40" value="3. start service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" source="O7znUG1SWmAurwfOPOOh-13" target="O7znUG1SWmAurwfOPOOh-21">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="370" y="240" as="sourcePoint" />
             <Array as="points">
@@ -59,7 +59,7 @@
             <mxPoint x="355" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-41" value="return exercise values" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1" target="O7znUG1SWmAurwfOPOOh-1">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-41" value="5. on exercise values change" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1" target="O7znUG1SWmAurwfOPOOh-1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="760" y="420" as="sourcePoint" />
             <mxPoint x="680" y="420" as="targetPoint" />
@@ -71,7 +71,7 @@
         <mxCell id="O7znUG1SWmAurwfOPOOh-43" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="O7znUG1SWmAurwfOPOOh-42">
           <mxGeometry x="45" y="240" width="10" height="98.5" as="geometry" />
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-44" value="observe current exercise live data" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" target="O7znUG1SWmAurwfOPOOh-42">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-44" value="4. observe current exercise live data" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1" target="O7znUG1SWmAurwfOPOOh-42">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="115" y="320" as="sourcePoint" />
             <Array as="points">
@@ -81,14 +81,14 @@
             <mxPoint x="580" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-47" value="stop exercise" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-47" value="7. stop exercise" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
           <mxGeometry x="0.0133" relative="1" as="geometry">
             <mxPoint x="30" y="560" as="sourcePoint" />
             <mxPoint x="105" y="560" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-48" value="stop exercise service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-48" value="8. stop exercise service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="115" y="620" as="sourcePoint" />
             <Array as="points">
@@ -98,7 +98,7 @@
             <mxPoint x="355" y="620" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-50" value="stop service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-50" value="9. stop service" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=horizontal;curved=0;rounded=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="360" y="680" as="sourcePoint" />
             <Array as="points">
@@ -108,7 +108,7 @@
             <mxPoint x="580" y="680" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="O7znUG1SWmAurwfOPOOh-51" value="update UI" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="1">
+        <mxCell id="O7znUG1SWmAurwfOPOOh-51" value="10. update UI" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="115" y="724" as="sourcePoint" />
             <Array as="points">
