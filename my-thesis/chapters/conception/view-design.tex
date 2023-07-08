@@ -60,7 +60,7 @@ As part of calculating the energy expenditure, the \emph{ExerciseFragment} facil
     \item A request to start the exercise is sent to the \emph{ExerciseServiceManager}.
     \item The \emph{ExerciseService} is started.
     \item \emph{HomeFragment} actively observes the exercise live data from \emph{ExerciseViewModel}.
-    \item when the values from the live data change, \emph{ExerciseFragment} is notified.
+    \item When the values from the live data change, \emph{ExerciseFragment} is notified.
     \item \emph{ExerciseFragment} updates the UI according to the data changes.
     \item A button is pressed to stop the exercise.
     \item A request to stop the exercise is sent to the \emph{ExerciseServiceManager}.
@@ -115,6 +115,5 @@ As a result, the following sequence of operations is created to support the func
     \label{fig:userfragment_add new user}
 \end{figure}
 
-
-
-
+To meet the requirement of deleting user data, the UserFragment is designed to handle this functionality. 
+To support this functionality, the following sequence of operation is implemented:
