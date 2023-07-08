@@ -19,20 +19,20 @@ A system sequence can now be defined as a result of analyzing the following use 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrams/connection-service-onStart.drawio.png}
+    \includegraphics[width=0.9\textwidth]{diagrams/connection-service-onStart.drawio.png}
     \caption{Connection service sequence diagram}
     \label{fig:connection_diagram}
 \end{figure}
-
+Since one of the requirements is to monitor real-time heart rate, it is mandatory to establish connection to the heart rate sensor and handle the broadcasted heart rate data. The user should have a way to easily connect and disconnect from the device as desired.
 The following sequence will be executed as a way to maintain connection to the BLE heart rate sensor and retrieve the heart rate data.
 \begin{enumerate}
     \item A request to start the \emph{connection service} is received.
     \item The service initiates a bluetooth low energy connection to the heart rate sensor device.
-    \item After the connection has been established, the \emph{connection service} listens to the heart rate data broadcasted by the heart rate sensor device
-    \item The heart rate sensor broadcasts heart rate data
-    \item The service publishes an event containing the received heart rate data
+    \item After the connection has been established, the \emph{connection service} listens to the heart rate data broadcasted by the heart rate sensor device.
+    \item The heart rate sensor broadcasts heart rate data.
+    \item The service publishes an event containing the received heart rate data.
     \item A request to stop the \emph{connection service} is received.
-    \item The service stops the connection with the heart rate sensor device
+    \item The service stops the connection with the heart rate sensor device.
 \end{enumerate}
 
 \subsubsection{Activity Monitor}
@@ -41,6 +41,19 @@ Based on the analysis of the following use case, a system sequence that outlines
     \enquote{As an physically active individuals, I want the application to track and display my current activity so that I can keep track of my progress and make adjustments to my physical activities.} 
 \end{quotation}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{diagrams/activity-monitor-seq.drawio.png}
+    \caption{Activity service sequence diagram}
+    \label{fig:activity_diagram}
+\end{figure}
+
+The following sequence illustrates the steps in monitoring the user's activity, which is one of the key use cases in the system:
+\begin{enumerate}
+    \item The \emph{activity service} actively listens to the heart rate event broadcasted by the \emph{connection service}.
+    \item On heart rate event received, the \emph{activity service} classifies the user's current activity based on the user's current heart rate by using the formula mentioned in \autoref{chap:activity_intensity}
+    \item Once the heart rate is classified, the service publishes an event containing the current activity.
+\end{enumerate}
 
 
 
