@@ -56,8 +56,39 @@ The following sequence illustrates the steps in monitoring the user's activity, 
 \end{enumerate}
 
 \subsubsection{Calculate Energy Expenditure}
-Given that one of the requirements defined in the use cases of the system is to calculate burned calories or energy expenditure, it is necessary to implement a feature to that enables the calculation of energy expenditure. 
-Based on the formula mentioned in \autoref{chap:energy_expenditure}, it is required to specify the duration during which the calculation will be performed. To facilitate this, it is recommended to create a record of exercise. The exercise should holds the attributes needed for the calculation of the energy expenditure.
+Given that one of the requirements defined in the use cases of the system is to calculate burned calories or energy expenditure, it is necessary to implement a feature that enables the calculation of energy expenditure. 
+Based on the formula mentioned in \autoref{chap:energy_expenditure}, it is required to specify the duration during which the calculation will be performed. 
+To facilitate this, it is recommended to create a record of exercise. The exercise should hold the attributes needed for the calculation of the energy expenditure.
+Prior to initiating an exercise, it is necessary for the user to establish a connection with the heart rate sensor. This ensures the availability of real-time heart rate data, which is vital for accurate energy expenditure calculations during the exercise.
 
+A system sequence can now be defined as a result of analyzing the following use case:
+\begin{quotation}
+    \enquote{As a fitness enthusiast, I want the application to calculate and display the number of calories burned based in my exercises. This allows me to keep track of my progress and make adjustments to my exercises.} 
+\end{quotation}
+
+The following sequence is executed as a way to track the current exercise and calculate the energy expenditure:
+\begin{enumerate}
+    \item A request to start the exercise is received.
+    \item The \emph{exercise service} retrieves the active exercise from the repository, which is automatically created and set active by the \emph{exercise view model} when the user starts the exercise
+    \item active exercise is returned
+    \item The \emph{exercise service} actively listens to the heart rate event broadcasted by the \emph{connection service}.
+    \item Retrieved heart rate event.
+    \item The \emph{exercise service} processes active exercise. In this process, the attributes within the exercise such as average bpm and burned calories are calculated.
+    \item The \emph{exercise service} publishes an event containing the processed exercise.
+    \item The processed exercise is persisted to the database.
+    \item The persisted exercise is returned.
+    \item A request to stop the exercise is received.
+    \item The active exercise is marked as done.
+    \item The \emph{exercise service} publishes an event containing the processed exercise.
+    \item The processed exercise is persisted to the database.
+    \item The persisted exercise is returned.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{diagrams/exercise-service-start.drawio.png}
+    \caption{Exercise service on start exercise sequence diagram}
+    \label{fig:start_exercise_diagram}
+\end{figure}
 
 
