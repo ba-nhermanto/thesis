@@ -97,18 +97,24 @@ The TextField provides a responsive and interactive interface, enabling users to
     \label{fig:userfragment_mockup}
 \end{figure}
 
-To fulfill the requirements, the \emph{UserFragment} must facilitate adding a new user and updating their data. As a result, the following sequence of operations is created to support the functionality to add a new user and to update their data.
+To fulfill the requirements, the \emph{UserFragment} must facilitate adding a new user and updating their data. The functionalities to add a new user and to update their data share the same sequence of operations in the \emph{view} level with the only difference is the button.
+As a result, the following sequence of operations is created to support the functionality to add a new user and to update their data.
 
 \begin{enumerate}
-    \item 
+    \item A button to add new user or update user is pressed.
+    \item User data is retrieved from the input and validated.
+    \item User data sent to \emph{UserViewModel} to be persisted in the database.
+    \item Saved user is returned
+    \item The UI is updated according to the saved user.
 \end{enumerate}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{images/user-fragment-mockup.png}
-    \caption{UserFragment add new user}
+    \includegraphics[width=0.5\textwidth]{diagrams/create-user-seq.drawio.png}
+    \caption{UserFragment add new user sequence diagram}
     \label{fig:userfragment_add new user}
 \end{figure}
+
 
 
 
