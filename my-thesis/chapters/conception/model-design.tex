@@ -1,4 +1,5 @@
 \subsection{Model}
+\label{chap:model_design}
 The \emph{model} represents the business logic to solve the problems listed as the requirements of the systems. Once the use cases outlined in \autoref{chap:requirements} are analyzed, the functions of each system components can be determined and then a sequence of operations can be created for each specific use case.
 To gain a better overview and understanding of the entities inside the system, a diagram is created.
 \begin{figure}[H]
@@ -12,6 +13,7 @@ Each \emph{user} within the system has one to many relationship with both \emph{
 Once the entities have been defined, the system's functionalities can now be discussed based on the identified use cases.
 
 \subsubsection{Heart Rate Monitor}
+\label{chap:hr_monitor_design}
 A system sequence can now be defined as a result of analyzing the following use case:
 \begin{quotation}
     \enquote{As a health-oriented user, I want the application to show my live heart rate so that I can monitor my cardiovascular activity.} 
@@ -36,6 +38,7 @@ The following sequence will be executed as a way to maintain connection to the B
 \end{enumerate}
 
 \subsubsection{Activity Monitor}
+\label{chap:activity_monitor_design}
 Based on the analysis of the following use case, a system sequence that outlines the sequence of actions and interactions within the system can now be established.
 \begin{quotation}
     \enquote{As an physically active individuals, I want the application to track and display my current activity so that I can keep track of my progress and make adjustments to my physical activities.} 
@@ -79,16 +82,27 @@ The following sequence is executed as a way to track the current exercise and ca
     \item The persisted exercise is returned.
     \item A request to stop the exercise is received.
     \item The active exercise is marked as done.
-    \item The \emph{exercise service} publishes an event containing the processed exercise.
-    \item The processed exercise is persisted to the database.
+    \item The \emph{exercise service} publishes an event containing the completed exercise.
+    \item The completed exercise is persisted to the database.
     \item The persisted exercise is returned.
 \end{enumerate}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrams/exercise-service-start.drawio.png}
-    \caption{Exercise service on start exercise sequence diagram}
+    \caption{Exercise service on start and stop exercise sequence diagram}
     \label{fig:start_exercise_diagram}
 \end{figure}
+
+\subsubsection{Event Bus}
+As the \emph{services} need to communicate with each other, it is very advantageous to implement an event bus architecture pattern based on the observable pattern described in Design Patterns \autocite{gamma1995design}. 
+It involves using an event bus as a central hub for publishing and subscribing to events. Components can publish events to the bus without needing to know the receivers, and they can subscribe to specific types of events without knowing the publishers.
+This promotes loose coupling as the components only need to know the event bus and not the other components.
+In the context of this project, there are three major event bus: \emph{HrEventBus}, which handles events related to heart rate data; \emph{ActivityEventBus}, responsible for managing events related to activity status; and lastly \emph{ExerciseEventBus}, dedicated to handling exercise events.
+
+\subsubsection{Profile Management}
+According to the defined use cases, it is essential to develop a functionality that enables users to manage their personal data. This functionality includes creating a new user profile, allowing users to modify their existing data, and lastly providing the users the capability to permanently delete their own data. These features will be implemented at the \emph{view model} level as the \emph{view model} handles the data manipulation, ensuring efficient data management and user control.
+It will be discussed on \autoref{chap:viewmodel_design}
+
 
 
