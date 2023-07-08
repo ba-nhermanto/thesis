@@ -34,7 +34,7 @@ As part of the real-time tracking and display of heart rate and current activity
     \label{fig:homefragment_diagram}
 \end{figure}
 
-As part of the requirement, the user interface must facilitate the functionality to stop the connection between the application and the heart rate sensor. Therefore, the following sequence is needed:
+As part of the requirements, the user interface must facilitate the functionality to stop the connection between the application and the heart rate sensor. Therefore, the following sequence is needed:
 \begin{enumerate}
     \item A switch is pressed to disconnect the application to the heart rate sensor.
     \item A request to stop connection service is sent to the \emph{ConnectionServiceManager}.
@@ -55,16 +55,25 @@ The \emph{ExerciseFragment} serves as the main component for presenting exercise
 It shows an overview of the exercise, allowing users to access relevant information.
 As part of calculating the energy expenditure, the \emph{ExerciseFragment} facilitates intuitive controls to start and stop the exercise so that the data can be captured effectively. As a result, the following sequence is executed:
 
-% \begin{enumerate}
-%     \item 
-% \end{enumerate}
+\begin{enumerate}
+    \item A button is pressed to start the exercise.
+    \item A request to start the exercise is sent to the \emph{ExerciseServiceManager}.
+    \item The \emph{ExerciseService} is started.
+    \item \emph{HomeFragment} actively observes the exercise live data from \emph{ExerciseViewModel}.
+    \item when the values from the live data change, \emph{ExerciseFragment} is notified.
+    \item \emph{ExerciseFragment} updates the UI according to the data changes.
+    \item A button is pressed to stop the exercise.
+    \item A request to stop the exercise is sent to the \emph{ExerciseServiceManager}.
+    \item The \emph{ExerciseService} is stopped.
+    \item \emph{ExerciseFragment} updates the UI accordingly.
+\end{enumerate}
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{diagrams/}
-%     \caption{ExerciseFragment start exercise sequence diagram}
-%     \label{fig:exercisefragment_start_diagram}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{diagrams/start-ex-frag.drawio.png}
+    \caption{ExerciseFragment start exercise sequence diagram}
+    \label{fig:exercisefragment_start_diagram}
+\end{figure}
 
 
 \begin{figure}[H]
@@ -74,8 +83,32 @@ As part of calculating the energy expenditure, the \emph{ExerciseFragment} facil
     \label{fig:exercisefragment_mockup}
 \end{figure}
 
+\subsubsection{UserFragment}
+The \emph{UserFragment} serves as the main component for managing user-related information. 
+The \emph{UserFragment} presents an overview of the user's data, allowing users to view and manage their data conveniently. 
+It offers an organized and user-friendly display, enabling users to access their profile and manage their data, including deleting their data.
+The user data is displayed in a user-friendly and editable format within a TextField. This allows users to view and conveniently modify their data. 
+The TextField provides a responsive and interactive interface, enabling users to easily input or update their information. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/user-fragment-mockup.png}
+    \caption{UserFragment mock-up}
+    \label{fig:userfragment_mockup}
+\end{figure}
 
+To fulfill the requirements, the \emph{UserFragment} must facilitate adding a new user and updating their data. As a result, the following sequence of operations is created to support the functionality to add a new user and to update their data.
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/user-fragment-mockup.png}
+    \caption{UserFragment add new user}
+    \label{fig:userfragment_add new user}
+\end{figure}
 
 
 
