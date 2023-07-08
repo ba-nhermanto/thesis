@@ -4,7 +4,7 @@ It is responsible for displaying the pre-defined functionalities in \autoref{cha
 Several mock-ups have been designed using the UI design tool UIzard\footnote{UIzard is a UI design tool used for designing wireframes, mockups, and prototypes. Homepage: \url{https://uizard.io/}} to provide a clearer visualization of the layout of the user interface.
 
 \subsubsection{HomeFragment}
-The HomeFragment serves as the main screen of the application, providing an overview of the user's health and activity-related functionalities defined in \autoref{chap:hr_monitor_design}. This \emph{view} consists of various components, including real-time heart rate display and activity monitor.
+The \emph{HomeFragment} serves as the main screen of the application, providing an overview of the user's health and activity-related functionalities defined in \autoref{chap:hr_monitor_design}. This \emph{view} consists of various components, including real-time heart rate display and activity monitor.
 The real-time heart rate display dynamically shows the user's live heart rate, allowing them to track their cardiovascular activity. Additionally, it features a dynamic graph that visualizes the user's heart rate history, which enables them to track their heart rate patterns over time.
 The activity monitor informs the user's current activity intensity based on their current heart rate, which enables them to track their activity intensity and adjust their current activity intensity according to their needs. As mentioned in \autoref{chap:activity_intensity}, the intensity levels range from very light, light, moderate, hard, and very hard.
 
@@ -14,4 +14,51 @@ The activity monitor informs the user's current activity intensity based on thei
     \caption{HomeFragment mock-up}
     \label{fig:homefragment_mockup}
 \end{figure}
+
+As part of the real-time tracking and display of heart rate and current activity, the following sequence is executed:
+\begin{enumerate}
+    \item A switch is pressed to connect the application to the heart rate sensor.
+    \item A request to start connection service is sent to the \emph{ConnectionServiceManager}.
+    \item The \emph{ConnectionService} is started.
+    \item \emph{HomeFragment} actively observes the heart rate live data from \emph{HrViewModel}.
+    \item \emph{HomeFragment} actively observes the current activity live data from \emph{HrViewModel}.
+    \item when the values from both the live data change, \emph{HomeFragment} is notified.
+    \item \emph{HomeFragment} updates the UI according to the data changes.
+
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{diagrams/hr-broadcast-homefragment.drawio.png}
+    \caption{HomeFragment sequence diagram}
+    \label{fig:homefragment_diagram}
+\end{figure}
+
+As part of the requirement, the user interface must facilitate the functionality to stop the connection between the application and the heart rate sensor. Thus, the following sequence is needed:
+\begin{enumerate}
+    \item A switch is pressed to connect the application to the heart rate sensor.
+    \item A request to start connection service is sent to the \emph{ConnectionServiceManager}.
+    \item The \emph{ConnectionService} is started.
+    \item \emph{HomeFragment} actively observes the heart rate live data from \emph{HrViewModel}.
+    \item \emph{HomeFragment} actively observes the current activity live data from \emph{HrViewModel}.
+    \item when the values from both the live data change, \emph{HomeFragment} is notified.
+    \item \emph{HomeFragment} updates the UI according to the data changes.
+
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{diagrams/hr-broadcast-homefragment.drawio.png}
+    \caption{HomeFragment sequence diagram}
+    \label{fig:homefragment_diagram}
+\end{figure}
+
+
+\subsubsection{ExerciseFragment}
+The \emph{ExerciseFragment} serves as the main component for presenting exercise details and displaying the calculation of energy expenditure. 
+It shows an overview of the exercise, allowing users to access relevant information.
+
+
+
+
 
