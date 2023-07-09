@@ -1,2 +1,16 @@
 \subsection{ViewModel}
 \label{chap:viewmodel_design}
+The \emph{view model} plays a crucial role in the architecture of an application. It serves as the intermediary between the \emph{view} and the \emph{model}.
+The \emph{view model} is responsible for providing the necessary data and functionality to the \emph{view}, resulting in a clear separation between the \emph{view} and the \emph{model}.
+By decoupling these components, the \emph{view model} supports separation of concerns.
+In the system consists of three \emph{view models}, namely \emph{HrViewModel}, responsible for managing business logics related to heart rate and activity data, \emph{ExerciseViewModel}, which provides business logics for exercise related data, and lastly \emph{UserViewModel}, responsible for managing business logics related to user.
+
+\subsubsection{HrViewModel}
+As mentioned, the \emph{HrViewModel} is responsible for managing business logics related to the heart rate data and activity within the system.
+This \emph{ViewModel} facilitates the communication between the \emph{HomeFragment} and the business logics related to the heart rate data and activity, for instance, \emph{connection service} and \emph{activity service}.
+Additionally, it includes heart rate LiveData \footnote{\emph{LiveData} is an observable data holder class. LiveData follows the observable pattern and allows other components to observe changes in the data. URL: \url{https://developer.android.com/topic/libraries/architecture/livedata}} and activity LiveData, enabling the fragment to observe these data and receive updates whenever changes occur. This allows fragment to react accordingly and correspondingly adjust the user interface.
+Sequence diagrams are created to visually represent the sequence of operations executed in \emph{HrViewModel}..
+
+
+
+To provide the \emph{HomeFragment} with the necessary heart rate data, the following sequence of operations is executed:
