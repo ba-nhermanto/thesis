@@ -47,6 +47,18 @@ The \emph{ExerciseViewModel} is responsible for managing business logics related
 It supports the communication between the \emph{ExerciseFragment} and the business logics related to exercise such as the \emph{ExerciseService}.
 The \emph{ExerciseViewModel} also manages the current exercise LiveData, which holds the current exercise data and is observed by the \emph{ExerciseFragment} for real-time updates. 
 Additionally, the ExerciseViewModel interacts with other components, for instance, the repositories to perform necessary operations to manage data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/exercise-view-model-seq.drawio.png}
+    \caption{ExerciseViewModel exercise data flow sequence diagram}
+    \label{fig:exerciseviewmodel_exercisedata}
+\end{figure}
 To support the \emph{ExerciseFragment} with the actual exercise data, the following sequence of operations is provided.
+\begin{enumerate}
+    \item The \emph{ExerciseViewModel} actively listens to events published in \emph{ExerciseEventBus}.
+    \item Event containing exercise data is retrieved.
+    \item The \emph{ExerciseViewModel} updates the exercise LiveData.
+\end{enumerate}
 
 \subsubsection{UserViewModel}
