@@ -83,8 +83,28 @@ The following sequence of operations is executed to support the functionality to
     \item The request is forwarded to \emph{UserRepository} to be persisted in the database. Room database automatically searches for existing user in the database, if no user is found, it creates a new user, otherwise it updates the user.
     \item The saved user is returned.
     \item The user list live data is updated with the saved user.
-    \item The saved user is marked as active and saved within the database.
+    \item The saved user is marked as active.
     \item The \emph{UserViewModel} updates the active user live data.
 \end{enumerate}
 
 The functionality to delete user is supported through the following sequence of operations.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{diagrams/delete-user-vm.drawio.png}
+    \caption{UserViewModel delete user sequence diagram}
+    \label{fig:userviewmodel_deleteuser}
+\end{figure}
+
+\begin{enumerate}
+    \item The \emph{UserViewModel} receives a request to delete user.
+    \item \emph{ServiceRunningChecker} validates if there are any running services
+    \item Validation result is returned
+    \item if there are no service running, \emph{UserRepository} deletes the user.
+    \item The last created user is marked as active.
+    \item The \emph{UserViewModel} updates the active user live data.
+\end{enumerate}
+
+Alternate sequence
+\begin{enumerate}[start=4]
+    \item If the validation fails, error will be thrown and \emph{UserFragment} notifies the user.
+\end{enumerate}
