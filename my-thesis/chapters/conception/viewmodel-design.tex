@@ -71,3 +71,20 @@ The active user LiveData contains information regarding the current active user,
 Sequence diagrams have been created to provide a better overview of the functionalities offered by the \emph{UserViewModel}. These diagrams illustrate the sequence of interactions and method calls between the \emph{UserViewModel} , the repository, and other relevant components.
 
 The following sequence of operations is executed to support the functionality to add and update new user.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{diagrams/upsert-user-vm.drawio.png}
+    \caption{UserViewModel add or update user sequence diagram}
+    \label{fig:userviewmodel_upsertuser}
+\end{figure}
+
+\begin{enumerate}
+    \item The \emph{UserViewModel} receives a request to update or insert user.
+    \item The request is forwarded to \emph{UserRepository} to be persisted in the database. Room database automatically searches for existing user in the database, if no user is found, it creates a new user, otherwise it updates the user.
+    \item The saved user is returned.
+    \item The user list live data is updated with the saved user.
+    \item The saved user is marked as active and saved within the database.
+    \item The \emph{UserViewModel} updates the active user live data.
+\end{enumerate}
+
+The functionality to delete user is supported through the following sequence of operations.
