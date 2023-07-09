@@ -53,6 +53,7 @@ As part of the requirements, the user interface must facilitate the functionalit
 \subsubsection{ExerciseFragment}
 The \emph{ExerciseFragment} serves as the main component for presenting exercise details and displaying the calculation of energy expenditure. 
 It shows an overview of the exercise, allowing users to access relevant information.
+The exercise displayed in the ExerciseFragment is connected to the ExerciseLiveData within the ExerciseViewModel. This connection is established through data binding\footnote{\emph{Data Binding} binds UI components in layouts to data sources in the app using a declarative format rather than programmatically. URL: \url{https://developer.android.com/topic/libraries/data-binding}}, ensuring automatic updates when the data changes. 
 As part of calculating the energy expenditure, the \emph{ExerciseFragment} facilitates intuitive controls to start and stop the exercise so that the data can be captured effectively. As a result, the following sequence is executed:
 
 \begin{enumerate}
