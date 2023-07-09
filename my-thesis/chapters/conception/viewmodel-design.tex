@@ -11,6 +11,18 @@ This \emph{ViewModel} facilitates the communication between the \emph{HomeFragme
 Additionally, it includes heart rate LiveData \footnote{\emph{LiveData} is an observable data holder class. LiveData follows the observable pattern and allows other components to observe changes in the data. URL: \url{https://developer.android.com/topic/libraries/architecture/livedata}} and activity LiveData, enabling the fragment to observe these data and receive updates whenever changes occur. This allows fragment to react accordingly and correspondingly adjust the user interface.
 Sequence diagrams are created to visually represent the sequence of operations executed in \emph{HrViewModel}..
 
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrams/hrviewmodel-hr.drawio.png}
+    \caption{HrViewModel heart rate data flow sequence diagram}
+    \label{fig:hrviewmodel_hrdata}
+\end{figure}
 
 To provide the \emph{HomeFragment} with the necessary heart rate data, the following sequence of operations is executed:
+\begin{enumerate}
+    \item The \emph{HrViewModel} actively listens to events published in \emph{HrEventBus}.
+    \item Event containing heart rate data is retrieved.
+    \item Heart rate from the event is extracted and sent to the repository to be persisted.
+    \item Heart rate is saved in the database and returned to \emph{HrViewModel}
+    \item \emph{HrViewModel} updates the heart rate LiveData.
+\end{enumerate}
