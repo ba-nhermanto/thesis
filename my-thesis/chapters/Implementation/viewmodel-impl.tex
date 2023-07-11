@@ -1,0 +1,156 @@
+\section{ViewModel}
+This chapter explains implementation details of the view model designed in \autoref{chap:viewmodel_design}
+
+\subsection{HrViewModel}
+\label{chap:hrviewmodel_impl}
+To support real-time updates of heart rate and activity data, the \verb;HrViewModel; uses \verb;LiveData; objects. These \verb;LiveData; objects include \verb;currentHrBpm;, \verb;currentActivity;, and \verb;currentHrList;.
+The \verb;currentHrBpm; and \verb;currentActivity; contain the current heart rate bpm and activity intensity level respectively. On the other hand, the \verb;currentHrList; holds a list of \verb;Heartrate;.
+\begin{lstlisting}[caption={LiveData implementation (HrViewModel)}]
+    val currentHrBpm: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
+    }
+    val currentActivity: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val currentHrList: MutableLiveData<List<Int>> by lazy {
+        MutableLiveData<List<Int>>()
+    }
+\end{lstlisting}
+
+In order to receive the heart rate and activity data, the \verb;HrViewModel; subscribes to the \verb;HrEventBus; and the \verb;ActivityEventBus;. 
+When receiving data from the \verb;HrEventBus;, the \verb;HrViewModel; updates the value of \verb;currentHrBpm; and \verb;currentHrList;. 
+Additionally, \verb;HrViewModel; saves the received heart rate data to the database and to prevent ANR, this process runs on a coroutine.
+\begin{lstlisting}[caption={On heart rate event received (HrViewModel)}]
+private fun onHrReceived(newHrBpm: Int) {
+    Log.d(TAG, "new hr data received = $newHrBpm")
+    currentHrBpm.value = newHrBpm
+    val hr = Heartrate(
+        userId = activeUser!!.userId,
+        bpm = newHrBpm,
+        timestamp = Timestamp(System.currentTimeMillis())
+    )
+    viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            hrRepository.save(hr)
+        }
+    }
+
+    val temp = currentHrList.value?.toMutableList()
+    temp?.add(newHrBpm)
+    currentHrList.value = temp?.toList()
+    Log.d(TAG, "hr list modified = ${currentHrList.value}")
+}
+\end{lstlisting}
+When activity data from the \verb;ActivityEventBus; is received, the \verb;HrViewModel; updates the value of \verb;currentActivity;.
+\begin{lstlisting}[caption={On activity event received (HrViewModel)}]
+private fun onActivityReceived(newActivity: Activity) {
+    currentActivity.value = newActivity.type
+}
+\end{lstlisting}
+
+Additionally, the \verb;HrViewModel; retrieves the currently active user from the database upon initialization, and listens to \url{ActiveUserChangeEvent} to detect any changes in the active user.
+When there are changes to the active user, the \verb;HrViewModel; updates the \verb;currentHrList; value with the current active user's list of heart rate data for graphing purposes.
+
+\subsection{ExerciseViewModel}
+\label{chap:exerciseviewmodel_impl}
+The \verb;ExerciseViewModel; maintains two live data objects: \verb;currentExercise; and \verb;current;-\verb;ExerciseList;, which hold the exercise information for the current session and the list of all exercises belonging to the active user, respectively. 
+\begin{lstlisting}[caption={LiveData implementation (ExerciseViewModel)}]
+    val currentExercise: MutableLiveData<Exercise> by lazy {
+        MutableLiveData<Exercise>()
+    }
+    val currentExercisesList: MutableLiveData<List<Exercise>> by lazy {
+        MutableLiveData<List<Exercise>>()
+    }
+\end{lstlisting}
+The \verb;ExerciseViewModel; subscribes to the \verb;ExerciseEventBus; to receive updates on exercise events. Upon receiving data from the event bus, it updates the corresponding live data objects, ensuring that the view is always up to date with the latest exercise data.
+
+{{\ttfamily \hyphenchar\the\font=`\-}
+Similar to the \verb;HrViewModel;, the \verb;ExerciseViewModel; fetches the currently active user from the database upon initialization and actively observes \texttt{ActiveUserChangeEvent}.
+The \verb;ExerciseViewModel; updates \verb;currentExercise; and \texttt{currentListExercise} accordingly when changes occur to the active user.
+\par}
+
+Additionally, the \verb;ExerciseViewModel; includes a logic to create an exercise with default values and save it to the database when the user starts a new exercise session. This logic ensures that the exercise is initialized with appropriate default values to support the start exercise functionality.
+\begin{lstlisting}[caption={Create default exercise function (ExerciseViewModel)}]
+fun createExerciseWithBasicFields(): Exercise {
+    if (activeUser == null) {
+        throw NoActiveUserException()
+    }
+
+    val exercise = Exercise(
+        duration = 0,
+        userId = activeUser!!.userId,
+        averageHrBpm = 0,
+        startTime = Timestamp(System.currentTimeMillis()),
+        maxHrBpm = 0,
+        minHrBpm = 0,
+        caloriesBurned = 0,
+        done = false
+    )
+    currentExercise.value = exercise
+
+    viewModelScope.launch {
+        exerciseRepository.upsertExercise(exercise)
+    }
+
+    return exercise
+}
+\end{lstlisting}
+
+\subsection{UserViewModel}
+\label{chap:userviewmodel_impl}
+The \texttt{UserViewModel} manages two live data objects, for instance, \texttt{currentUser}, which contains the actual active user and \texttt{users}, which holds the list of all users in the database. 
+Upon initialization, the \texttt{UserViewModel} sets the values of those live data by fetching it from the database.
+
+The \texttt{UserViewModel} provides \texttt{setActiveUser} function to mark a user as active. When called, it updates the \texttt{currentUser} with the selected user and publishes \texttt{ActiveUserChangeEvent} to \texttt{ActiveEventBus}.
+\begin{lstlisting}[caption={Set active user function snippet (UserViewModel)}]
+    val au = userRepository.setActiveUser(userId)
+    activeUser.postValue(au)
+    publishActiveUser(au)
+\end{lstlisting}
+
+The \texttt{UserViewModel} implements \texttt{upsertUser} function. This function is responsible for updating an existing user or inserting a new user into the database. Once it is saved, it is marked automatically as the active user.
+\begin{lstlisting}[caption={Save user function snippet (UserViewModel)}]
+    val upserted = userRepository.upsertUser(user)
+    setActiveUser(upserted.userId)
+\end{lstlisting}
+
+Lastly, the \texttt{UserViewModel} provides \texttt{upsertUser} function to delete active user completely from the system.
+It checks if there are any running \texttt{ConnectionService} instances and also checks incomplete exercises. 
+It only proceeds with the deletion if the validation is passed. Additionally, if there are other users remaining, the function automatically sets the latest user as the active user. Otherwise, null will be set as the active user.
+\begin{lstlisting}[caption={Wrapper function for user deletion (UserViewModel)}]
+private suspend fun deleteUser(user: User): Boolean {
+    val activeExercise = userRepository.getActiveExerciseByUserId(user.userId)
+
+    if (serviceRunningChecker.isServiceRunning(ConnectionService::class.java, getApplication())) {
+        throw Exception("user has active hr sensor connection")
+    }
+
+    if (userRepository.getActiveExerciseByUserId(user.userId).isNotEmpty()) {
+        throw Exception("user: ${user.userId} has active exercise: $activeExercise")
+    }
+
+    userRepository.deleteUser(user)
+    return true
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={User deletion function (UserViewModel)}]
+suspend fun deleteActiveUser() {
+    var deleted = false
+    activeUser.value?.let {
+        try {
+            deleted = deleteUser(it)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message.toString())
+        }
+        if (deleted) {
+            try {
+                setActiveUser(userRepository.getUsers()[0].userId)
+            } catch (e: Exception) {
+                activeUser.postValue(null)
+                publishActiveUser(null)
+            }
+        }
+    }
+}
+\end{lstlisting}

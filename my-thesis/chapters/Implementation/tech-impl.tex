@@ -1,0 +1,65 @@
+\section{Technologies}
+The section describes the tools used in developing the system. 
+As discussed in \autoref{chap:tech}, the system is mainly built using Kotlin supported by the following tools and technologies.
+
+\subsection{Build Tool}
+In this project, the default build tool for Kotlin, which is Gradle\footnote{\emph{Gradle} is a build automation tool used for  building, testing, and deploying software projects. Homepage: \url{https://gradle.org/}}, is used.
+The Gradle Wrapper\footnote{\emph{Gradle Wrapper} is a script that runs Gradle commands without requiring an installation of Gradle on the local machine. URL: \url{https://docs.gradle.org/current/userguide/gradle_wrapper.html}} is naturally provided with Gradle. 
+By using the script, gradle tasks such as build, test, and run can be easily executed.
+
+\subsection{Code Style}
+This project follows the guidelines and conventions enforced by lint\footnote{\emph{lint} is the default code style checker in Android Studio for Kotlin. URL: \url{https://developer.android.com/studio/write/lint}}.
+Lint enforces coding standards and helps identify code style violations, ensuring a cleaner code. 
+Additionally, the checkstyle runs automatically before each commit to ensure that the project follows to the coding conventions.
+
+\subsection{PolarBleSDK}
+The system uses the PolarBle software development kit (SDK)\footnote{\emph{PolarBleSDK} maintains bluetooth low energy connection for sensors made by Polar. Github repository: \url{https://github.com/polarofficial/polar-ble-sdk/}} to establish a and maintain a seamless connection between the heart rate sensor and the application.
+Furthermore, the SDK provides tools and functionalities for data retrieval from the heart rate sensor.
+
+\subsection{CI/CD}
+In this project, Github Actions\footnote{\emph{Github Action} is a CI/CD platform available for repositories hosted in Github. Homepage: \url{https://github.com/features/actions}} is utilized as the CI/CD tool. 
+The CI/CD pipeline is configured to be triggered automatically when there is a pull request to the main branch and when that branch is successfully merged. The configured CI/CD actions in this project is run test and build. 
+This ensures that the code changes go through a standardized build and test process, maintaining the overall quality and stability of the project.
+
+\subsection{Database}
+In this project, Room is utilized as the database framework, which is based on SQLite. Room database is configured in kotlin as the following:
+\input{chapters/Implementation/listings/db-listing.tex}
+The database schema consists of three entities: user, exercise, and heartrate, each representing a distinct data model.
+These data access objects\footnote{\emph{Data Access Object (DAO)} serves as the main access point for interacting with the database. URL: \url{https://developer.android.com/training/data-storage/room/accessing-data}}: UserDao, ExerciseDao, heartrateDao, are configured, allowing interaction with the database. These DAOs define methods for querying data specific to each entities to the database.
+
+In addition, two TypeConverters, namely DateTypeConverter and TimestampTypeConverter, are implemented to handle conversions between complex data types like Date and Timestamp to their corresponding storage representations in the database.
+
+Room features an auto-migration functionality, where it automatically handles schema changes and data migration whenever a new version of the database is detected without the need of migration queries.
+But in case of a conflict between the versions of the database, a Migration SQL query must be defined, ensuring seamless migration of the database.
+
+\subsection{Dependency Injection}
+To handle the dependency injection in this project, Hilt\footnote{\emph{Hilt} is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in the project. Homepage: \url{https://developer.android.com/training/dependency-injection/hilt-android}} is used. 
+It enables the injection of DAOs into their respective repositories and repositories into their corresponding ViewModels and other components that required to interact with the database. 
+\begin{lstlisting}[caption={Dependency injection configuration (AppModule)}]
+    @Singleton
+    @Provides
+    fun provideDatabase(
+        @ApplicationContext app: Context
+    ) = HamDatabase.getInstance(app)
+
+    @Singleton
+    @Provides
+    fun provideUserDao(db: HamDatabase) = db.userDao()
+
+    @Singleton
+    @Provides
+    fun provideExerciseDao(db: HamDatabase) = db.exerciseDao()
+
+    @Singleton
+    @Provides
+    fun provideHeartrateDao(db: HamDatabase) = db.heartrateDao()
+\end{lstlisting}
+\subsection{Material Design}
+To help developing a visually appealing and user-friendly interface, Material Design is used to develop the user interface as it contains several components that are suitable for the project. 
+For instance, SwitchMaterial, MaterialButton, BottomNavigation.
+
+\subsection{MPAndroidChart}
+Additionally, MPAndroidChart helps generating an interactive and dynamic graph for visualizing heart rate history.
+In the scope of this project, it is required to implement a line graph to visualize the heart rate data. 
+Therefore, the LineChart\footnote{The implementation using \emph{LineChart} is discussed in \autoref{chap:view_impl}} in the MPAndroidChart is used to implement the heart rate data visualization.
+

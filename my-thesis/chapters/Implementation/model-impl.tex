@@ -1,0 +1,159 @@
+\section{Model}
+\label{chap:model_impl}
+This chapter explains implementation details of the model defined in \autoref{chap:model_design}.
+
+\subsection{Entities and Relationship}
+\label{chap:objectmodel_impl}
+In this subsection, the detailed implementation of the entities within the system and their relationships with each other will be discussed.
+
+\subsubsection{User Entity}
+The \verb;User; entity is responsible for storing and managing user data within the system.
+It serves as a representation of an individual user and holds necessary data to support other functionalities.
+Additionally, the \verb;User; entity has functions to calculate the user's age based on their date of birth and to estimate the maximum heart rate\footnote{\url{MAX_BPM_GLOBAL} is a global constant with an integer value of 220} using the formula mentioned in \autoref{chap:activity_intensity}.
+\input{chapters/Implementation/listings/userentity-listing.tex}
+
+\subsubsection{Exercise Entity}
+The \verb;Exercise; entity manages information related to the user's exercises. 
+This entity is responsible for tracking and recording user's exercise. Furthermore, the energy expenditure is also saved in this entity.
+\input{chapters/Implementation/listings/exerciseentity-listing.tex}
+
+\subsubsection{Heartrate Entity}
+The \verb;Heartrate; entity is responsible for storing heart rate information of users. 
+This entity manages data that is valuable for monitoring users' cardiovascular health and exercise intensity.
+\input{chapters/Implementation/listings/heartrateentity-listing.tex}
+
+\subsubsection{UserAndExercise Relationship}
+The \verb;UserAndExercise; relationship establishes a one-to-many relationship between \verb;User; and \verb;Exercise;. 
+This relationship allows \verb;User; to have multiple \verb;Exercise; associated with their profile. 
+The relationship is defined with the "on delete cascade" constraint, ensuring that if a \verb;User; is deleted, all associated \verb;Exercise; are also deleted.
+
+\subsubsection{UserAndHeartrate Relationship}
+The \verb;UserAndHeartrate; relationship represents a one-to-many relationship between \verb;User; and \verb;Heartrate;. 
+\verb;User; can have multiple \verb;Heartrate; entries associated with them. Similar to the The \verb;UserAndExercise; relationship, the "on delete cascade" constraint ensures that if a \verb;User; is deleted, their related \verb;Heartrate; data is also deleted.
+
+\subsubsection{Activity Enum}
+The \verb;Activity; enum is a predefined set of values that represents different levels of activity intensity. 
+It provides a standardized way to categorize the intensity of physical activities based on the percentage of the user's maximum heart rate. 
+The percentage intensity values mentioned in \autoref{chap:activity_intensity} are mapped to the activity enum, supporting \verb;ActivityService; to classify activity intensity level.
+
+
+\subsection{Services}
+This subsection provides the details of the implementation of the services within the system.
+
+\subsubsection{Connection Service}
+The implementation of the \verb;ConnectionService; follows the concept outlined in \autoref{chap:hr_monitor_design}. It focuses on establishing a connection with the heart rate sensor and listening to the heart rate data broadcasted by the heart rate sensor. 
+It is implemented as a \verb;Service; class\footnote{A \url{Service} is an application component that can perform long-running operations in the background. URL: \url{https://developer.android.com/guide/components/services}} provided by Android, allowing it to run in the background even when the application is not in the foreground.
+
+The lifecycle of the \verb;ConnectionService; is managed by \verb;ConnectionServiceManager;, which handles the start and stop operations. 
+When the service is started, it automatically initiates the connection with the heart rate sensor and \verb;ConnectionServiceManager; sends the active user's device id to \verb;ConnectionService; as it is required to start the connection. 
+\begin{lstlisting}[caption={Function to start ConnectionService (Kotlin - ConnectionServiceManager)}]
+fun startConnectionService(context: Context, activeUser: User) {
+    try {
+        val serviceIntent = Intent(context, ConnectionService::class.java)
+        serviceIntent.putExtra("deviceId", activeUser.deviceId)
+        context.startForegroundService(serviceIntent)
+        Log.d(HomeFragment.TAG, "started hr streaming")
+    } catch (e: Exception) {
+        Log.e(HomeFragment.TAG, e.message.toString())
+    }
+}
+\end{lstlisting}
+
+To establish the connection with the heart rate sensor, the \verb;ConnectionService; utilizes the PolarBleSdk library.
+\begin{lstlisting}[caption={Function to initiate connection to heart rate sensor (ConnectionService)}]
+private fun connectPolar(polarId: String) {
+    polarBleApi.run {
+        setApiLogger { s: String? -> Log.d(TAG, "CONNECTION_SERVICE LOGGER $s") }
+
+        deviceConnected = try {
+            connectToDevice(polarId)
+            Log.d(TAG, "connected to $polarId")
+            true
+        } catch (polarInvalidArgument: PolarInvalidArgument) {
+            Log.e(TAG, "Failed to connect. Reason $polarInvalidArgument ")
+            false
+        }
+
+        setAutomaticReconnection(true)
+    }
+}
+\end{lstlisting}
+
+Once the connection to the heart rate sensor is established, \verb;ConnectionService; listens to the broadcasted heart rate data and publishes the data to \verb;HrEventBus;.
+This allows other components of the system, such as the \verb;HrViewModel;, to subscribe to the \verb;HrEventBus; and receive real-time heart rate updates. 
+\begin{lstlisting}[caption={Heart rate data broadcast listener (ConnectionService)}]
+polarBleApi.startListenForPolarHrBroadcasts(null)
+    .subscribe(
+        { polarBroadcastData: PolarHrBroadcastData ->
+            Log.d(TAG, "HR BROADCAST ${polarBroadcastData.polarDeviceInfo.deviceId} HR: ${polarBroadcastData.hr} batt: ${polarBroadcastData.batteryStatus}")
+            onHrReceived(polarBroadcastData.hr)
+            onBatteryReceived(polarBroadcastData.batteryStatus)
+        },
+        { error: Throwable ->
+            Log.e(TAG, "Broadcast listener failed. Reason $error")
+        },
+        { Log.d(TAG, "complete") }
+)
+\end{lstlisting}
+
+On the other hand, when the service is stopped by the \verb;ConnectionServiceManager;, the connection is gracefully terminated and the service will be stopped.
+
+\subsubsection{Activity Service}
+The \verb;ActivityService; is implemented based on \autoref{chap:activity_monitor_design}.
+First, it listens to the \verb;HrEventBus;, which receives real-time heart rate data from the \verb;ConnectionService;. 
+By subscribing to the \verb;HrEventBus;, the \verb;ActivityService; receives the latest heart rate data.
+Every time heart rate data is received, this service determines the user's current activity based \autoref{chap:activity_intensity}.
+\begin{lstlisting}[caption={Activity classifier (ActivityService)}]
+private fun activityClassifier(bpm: Int, user: User) : Activity {
+    val maxBpm = user.getMaxBpm()
+    val veryLightBpm = maxBpm * Activity.VERY_LIGHT.intensity
+    val lightBpm = maxBpm * Activity.LIGHT.intensity
+    val moderateBpm = maxBpm * Activity.MODERATE.intensity
+    val hardBpm = maxBpm * Activity.HARD.intensity
+    val veryHardBpm = maxBpm * Activity.VERY_HARD.intensity
+
+    return when (bpm) {
+        in 0 until veryLightBpm.toInt() -> Activity.VERY_LIGHT
+        in veryLightBpm.toInt() until lightBpm.toInt() -> Activity.LIGHT
+        in lightBpm.toInt() until moderateBpm.toInt() -> Activity.MODERATE
+        in moderateBpm.toInt() until hardBpm.toInt() -> Activity.HARD
+        in hardBpm.toInt() until veryHardBpm.toInt() -> Activity.VERY_HARD
+        else -> Activity.VERY_HARD
+    }
+
+}
+\end{lstlisting}
+
+Once the service classified the activity, the result will be published to \verb;ActivityEventBus;, allowing other components such as \verb;HrViewModel; to subscribe and receive the results.
+
+\subsubsection{Exercise Service}
+The implementation of this service follows the design described in \autoref{chap:burnedcalories_design}.
+It records exercises done by the users and calculate the energy expenditure in that exercise.
+
+Similar to the \verb;ConnectionService;, the lifecycle of the \verb;ExerciseService; is managed by another class named \verb;ExerciseServiceManager;, which handles the start and stop operations. 
+When the service starts, it finds an active exercise and active user within the database. 
+\begin{lstlisting}[caption={On service started (ExerciseService)}]
+    activeExercise = exerciseRepository.getActiveExercise()
+    setUser(activeExercise.userId) // this is a wrapper function to find and set active user in the service level
+\end{lstlisting}
+
+For the calculation of burned calories, \verb;ExerciseService; needs the user's heart rate, To retrieve the actual heart rate data, it actively listens to \verb;HeartrateEvent; published to \verb;HeartrateEventBus;.
+Every time heart rate event is received, \verb;ExerciseService; adds the heart rate bpm into a collection of \verb;Int; and updates the active exercise. The update process includes burned calories calculation based on \autoref{chap:energy_expenditure}. 
+\begin{lstlisting}[caption={Process active exercise (ExerciseService)}]
+    listOfHr.add(bpm)
+
+    activeExercise.averageHrBpm = listOfHr.average().toInt()
+    activeExercise.maxHrBpm = listOfHr.maxOrNull()
+    activeExercise.minHrBpm = listOfHr.minOrNull()
+    activeExercise.duration = getSecondsBetweenTimestampAndNow(activeExercise.startTime)
+    activeExercise.caloriesBurned = calculateCalories(activeExercise).toInt().coerceAtLeast(0)
+
+    CoroutineScope(Dispatchers.IO).launch {
+        exerciseRepository.upsertExercise(activeExercise)
+    }
+\end{lstlisting}
+
+To prevent \url{ANR}\footnote{\emph{Android Not Responsive (ANR)} occurs when the main thread is blocked. URL: \url{https://developer.android.com/topic/performance/vitals/anr}}, the process to save the exercise to the database is run on a coroutine.
+Once the exercise is updated and saved, it will be published to \verb;ExerciseEventBus;, which allows \verb;ExerciseViewModel; to be up-to-date with the active exercise.
+
+When the service is stopped by \verb;ExerciseServiceManager;, the service unsubscribes from the \verb;HeartrateEventBus;, mark the exercise as done, process the exercise and finally publish it to \verb;ExerciseEventBus;.

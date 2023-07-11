@@ -1,0 +1,23 @@
+\begin{lstlisting}[caption={User Entity (Kotlin)}]
+@Entity(tableName = "users")
+data class User(
+    @PrimaryKey(autoGenerate = true) val userId: Long = 0,
+    @ColumnInfo(name = "username") var username: String,
+    @ColumnInfo(name = "weight") var weight: Int,
+    @TypeConverters(DateTypeConverter::class)
+    @ColumnInfo(name = "dateOfBirth") val dateOfBirth: Date,
+    @ColumnInfo(name = "gender") var gender: Gender,
+    @ColumnInfo(name = "deviceId") var deviceId: String,
+    @ColumnInfo(name = "active") var active: Boolean = false
+) {
+    fun getAge(): Int {
+        val currentDate = LocalDate.now()
+        val dob = LocalDate.parse(dateOfBirth.toString())
+        return Period.between(dob, currentDate).years
+    }
+
+    fun getMaxBpm(): Int {
+        return (MAX_BPM_GLOBAL - 0.64*getAge()).toInt()
+    }
+}
+\end{lstlisting}
