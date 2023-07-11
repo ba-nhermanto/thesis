@@ -6,6 +6,7 @@ By decoupling these components, the \emph{view model} supports separation of con
 In the system consists of three \emph{view models}, namely \emph{HrViewModel}, responsible for managing business logics related to heart rate and activity data, \emph{ExerciseViewModel}, which provides business logics for exercise related data, and lastly \emph{UserViewModel}, responsible for managing business logics related to user.
 
 \subsubsection{HrViewModel}
+\label{chap:hrviewmodel_design}
 The \emph{HrViewModel} is responsible for managing business logics related to the heart rate data and activity within the system.
 This \emph{ViewModel} facilitates the communication between the \emph{HomeFragment} and the business logics related to the heart rate data and activity, for instance, \emph{connection service} and \emph{activity service}.
 Additionally, it includes heart rate LiveData\footnote{\emph{LiveData} is an observable data holder class. LiveData follows the observable pattern and allows other components to observe changes in the data. URL: \url{https://developer.android.com/topic/libraries/architecture/livedata}} and activity LiveData, enabling the fragment to observe these data and receive updates whenever changes occur. This allows fragment to react accordingly and adjust the user interface correspondingly.
@@ -43,6 +44,7 @@ The following sequence of operations is executed to provide the \emph{HomeFragme
 \end{figure}
 
 \subsubsection{ExerciseViewModel}
+\label{chap:exerciseviewmodel_design}
 The \emph{ExerciseViewModel} is responsible for managing business logics related to exercise within the application.
 It supports the communication between the \emph{ExerciseFragment} and the business logics related to exercise such as the \emph{ExerciseService}.
 The \emph{ExerciseViewModel} also manages the current exercise LiveData, which holds the current exercise data and is observed by the \emph{ExerciseFragment} for real-time updates. 
@@ -62,6 +64,7 @@ To support the \emph{ExerciseFragment} with the actual exercise data, the follow
 \end{enumerate}
 
 \subsubsection{UserViewModel}
+\label{chap:userviewmodel_design}
 The \emph{UserViewModel} is responsible for managing business logics related to user within the application.
 It provides the necessary functionalities and data access methods to manage and manipulate user-related information. 
 The \emph{UserViewModel} handles tasks such as adding a new user, updating user data, switching active user, and deleting a user, including all of their data.
