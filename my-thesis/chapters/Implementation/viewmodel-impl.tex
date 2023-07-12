@@ -53,7 +53,10 @@ When there are changes to the active user, the \verb;HrViewModel; updates the \v
 
 \subsection{ExerciseViewModel}
 \label{chap:exerciseviewmodel_impl}
-The \verb;ExerciseViewModel; maintains two live data objects: \verb;currentExercise; and \verb;current;-\verb;ExerciseList;, which hold the exercise information for the current session and the list of all exercises belonging to the active user, respectively. 
+{{\ttfamily \hyphenchar\the\font=`\-}
+The \verb;ExerciseViewModel; maintains two live data objects: \texttt{currentExercise} and \texttt{currentExerciseList}, which hold the exercise information for the current session and the list of all exercises belonging to the active user, respectively. 
+\par}
+
 \begin{lstlisting}[caption={LiveData implementation (ExerciseViewModel)}]
     val currentExercise: MutableLiveData<Exercise> by lazy {
         MutableLiveData<Exercise>()
