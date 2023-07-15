@@ -1,6 +1,6 @@
-\label{tab::qualitystandard}
 
 \begin{longtable}{p{0.2\textwidth} p{0.1\textwidth} p{0.5\textwidth} p{0.2\textwidth}}
+    \label{tab:qualitystandard}\\
 
     \caption{Core application quality standard based on Android Documentation \autocite{androidqualityguidelines} and its importance}\\
 
@@ -11,34 +11,28 @@
          & VX-N2 & The app supports gesture navigation for going back / going to the home screen. & less important \\
          & VX-N3 & The app correctly preserves and restores user or app state. & important \\
   
-        UI and Graphics & VX-U1 & The app supports both landscape and portrait orientations (if possible) and folding / unfolding. & important \\
-         & VX-U2 & The app uses the whole screen in both orientations and does not letterbox to account for orientation changes, including folding and unfolding. & not important \\
+        UI and Graphics & VX-U1 & The app supports both landscape and portrait orientations (if possible) and folding / unfolding. & less important \\
          & VX-U3 & The app correctly handles rapid transitions between display orientations and device folding / unfolding without rendering problems or losing state. & less important \\
   
         Visual quality & VX-V1 & The app displays graphics, text, images, and other UI elements without noticeable distortion, blurring, or pixelation. The app should use vector drawables where possible. & less important \\
-         & VX-V2 & The app displays text and text blocks in an acceptable manner for each of the app's supported languages. & important \\
          & VX-V3 & The app's content, and all web contents referred to by the app, support dark theme. & not important \\
+        
         Accessibility & VX-A1 & Touch targets should be at least 48dp in size. & less important \\
          & VX-A2 & The app's text and foreground content should maintain a high enough color contrast ratio with its background. & important \\
-         & VX-A3 & Describe each UI element, except for TextView, using contentDescription. & not important \\
   
         Background Service & FN-B1 & The app avoids running unnecessarily long services in the background. To ensure the smooth running of the user's device, the system applies various restrictions on background services. & important\\
 
         Stability & PS-S1 & The app does not crash or block the UI thread causing ANR ("Android Not Responding") errors.  & very important\\
 
         Performance & PS-P1 & The app loads quickly or provides onscreen feedback to the user (a progress indicator or similar cue) if the app takes longer than two seconds to load. & important\\
-        & PS-P2 & Apps should render frames every 16ms to achieve 60 frames per second. Developers can use the Profile HWUI rendering option in testing. If there are issues, tools are available to help diagnose slow rendering. & less important\\
-        & PS-P3 & With StrictMode enabled (see StrictMode Testing, below), no red flashes (performance warnings from StrictMode) are visible when testing the app. Any red flashes indicate bad behaviors regarding storage, network access, or memory leaks.  & less important\\
         
         Permissions & SC-P1 & The app requests only the absolute minimum number of permissions that it needs to support its use case at hand. & important \\
-        & SC-P2 & The app requests permission to access sensitive data (such as SMS, Call Log, or Location) or services that cost money (such as Dialer or SMS) only when directly related to the core use cases of the app. & important \\
-        & SC-P3 & The app requests runtime permissions in context, when the functionality is requested, rather than upfront during app startup. & less important\\
         & SC-P4 & The app clearly conveys why certain permissions are needed or follows the recommended flow to explain why it needs a permission. &  important \\
         & SC-P5 & The app should gracefully degrade when users deny or revoke a permission. The app should not prevent the user from accessing the app altogether. & important\\
         
         Data \& Files & SC-DF1 & All sensitive data is stored in the app's internal storage. & important\\
          & SC-DF2 & No personal or sensitive user data is logged to the system log or an app-specific log. & important\\
-         & SC-DF3 & The app does not use any non-resettable hardware IDs, such as the IMEI, for identification purposes. & less important\\
+         & SC-DF3 & The app does not use any non-resettable hardware IDs, such as the IMEI, for identification purposes. & not important\\
 
         
         \hline

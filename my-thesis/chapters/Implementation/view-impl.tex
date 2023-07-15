@@ -49,10 +49,18 @@ Additionally, the \texttt{HomeFragment} shows the user's current activity intens
     }
 \end{lstlisting}
 
-Furthermore, the fragment features an interactive graph that visualizes the user's heart rate data over time. Lastly, the \texttt{HomeFragment} observes the current active user and dynamically updates the user interface to display the current heart rate, activity level, and the graph.
+Furthermore, the fragment features an interactive graph that visualizes the user's heart rate data over time. 
+The graph is controlled by another component called \texttt{GraphService} using the MPAndroidChart library, specifically the \texttt{LineChart} class.
+The \texttt{GraphService} subscribes to the \texttt{HrEventBus}, which broadcasts heart rate data events. 
+Whenever a heart rate data event is received, the \texttt{GraphService} updates the data set associated with the graph. 
+This ensures that the graph is continuously updated with the latest heart rate data.
+Additionally, the \texttt{GraphService} also reacts to changes in the active user. 
+When the active user is changed, the \texttt{GraphService} generates a new graph based on the heart rate data of the new active user. 
+
+Lastly, the \texttt{HomeFragment} observes the current active user and dynamically updates the user interface to display the current heart rate, activity level, and the graph.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\textwidth]{images/homefragment-screenshot.jpeg}
+    \includegraphics[width=0.4\textwidth]{images/homefragment-screenshot.png}
     \caption{Screenshot of HomeFragment}
     \label{fig:homefragment_screenshot}
 \end{figure}
@@ -102,7 +110,7 @@ The user information is displayed in text fields and a calendar is available to 
 Additionally, \texttt{UserFragment} provides three buttons for deleting, adding, and updating user data.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/userfragment-screenshot.jpeg}
+    \includegraphics[width=0.5\textwidth]{images/userfragment-screenshot.png}
     \caption{Screenshot of UserFragment}
     \label{fig:userfragment_screenshot}
 \end{figure}
@@ -110,12 +118,5 @@ Additionally, \texttt{UserFragment} provides three buttons for deleting, adding,
 Furthermore, a separate \texttt{UserListFragment} is implemented to display a list of all users in the system. 
 Similar to the \texttt{ExerciseListFragment}, it uses a \texttt{RecyclerView} to display a list of users. 
 Each user in the list is clickable, allowing the user to change the active user by selecting a different user from the list.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/userlistfragment-screenshot.jpeg}
-    \caption{Screenshot of UserListFragment}
-    \label{fig:userlistfragment_screenshot}
-\end{figure}
 
 

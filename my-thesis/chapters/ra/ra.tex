@@ -21,6 +21,7 @@ By addressing these challenges, this research project intends to develop a proto
 In this chapter, the requirements of the application is listed by identifying and analyzing the use cases from the research project's goals and priorities.
 
 \subsection{Use Cases}
+\label{chap:use_case}
 A use case diagram is created to provide a clearer understanding of how the system works and the various usage scenarios. It offers a clear and straightforward visualization that aligns with the goal of the research project.
 \begin{figure}[H]
     \centering
@@ -35,31 +36,33 @@ The system includes several use cases to provide a comprehensive experience for 
 The primary use case, "Monitor Health", allows users to track important health indicators such as heart rate, calories burned, and current activity. It consists of three sub-use cases: "Display Real-Time Heart Rate", which shows the user's live heart rate on the application's interface; "Calculate Calories Burned", which calculates the number of calories burned in an exercise based on the user's heart rate;  "Monitor Activity", which observes the user's ongoing physical activity. In addition, the system includes "Manage User Profile" use case, which handles user profile management and data manipulation. Users can update or insert or delete data anytime using the respective sub-use cases. By integrating these use cases, the system effectively monitor health metrics and allows user to conveniently manage their data.
 
 \subsection{User Stories}
+\label{chap:user_stories}
 According to the use cases visualized on \autoref{fig:use_cases}, the following user stories can be determined:
 
 \begin{itemize}[label={},leftmargin=*]
     \item \textbf{Display Real-Time Heart Rate}
       \begin{itemize}[label={},leftmargin=*]
-        \item As a health-oriented user, I want the application to show my live heart rate so that I can monitor my cardiovascular activity.
+        \item As a health-oriented user, I want to monitor my cardiovascular activity.
       \end{itemize}
 
     \item \textbf{Track and Monitor Current Activity}
       \begin{itemize}[label={},leftmargin=*]
-        \item As an physically active individuals, I want the application to track and display my current activity so that I can keep track of my progress and make adjustments to my physical activities.
+        \item As an physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities.
       \end{itemize}
 
     \item \textbf{Calculate Calories Burned}
       \begin{itemize}[label={},leftmargin=*]
-        \item As a fitness enthusiast, I want the application to calculate and display the number of calories burned based in my exercises. This allows me to keep track of my progress and make adjustments to my exercises.
+        \item As a fitness enthusiast, I want to know the number of calories burned in my exercises. This allows me to keep track of my progress and make adjustments to my exercises.
       \end{itemize}  
 
     \item \textbf{Profile Management}
       \begin{itemize}[label={},leftmargin=*]
-        \item As a user of the application who is concerned about data privacy, I want to be able to manage my user profile easily. This includes updating or adding new information to my profile and create a new profile. I also want the ability to delete my data anytime. This allows me to have full control over my data.
+        \item As a user of the application who is concerned about data privacy, I want to be able to manage and control my user profile easily. 
       \end{itemize}
   \end{itemize}
 
 
 \subsection{Application Quality Standard}
-The evaluation of the system developed for this research project is guided by the core application quality standard outlined in Android Documentation \autocite{androidqualityguidelines}. These quality standards provide core foundation for assessing the quality of the application. To facilitate the evaluation a set of criteria is derived from the core application quality standard described outlined in Android Documentation \autocite{androidqualityguidelines}. The table below shows the criteria, along with the sub-characteristic as well as its relevance to the research project. These criteria will be reviewed during the evaluation process to assess the quality of the application developed in this research project.
+The evaluation of the system developed for this research project is guided by the core application quality standard outlined in Android Documentation \autocite{androidqualityguidelines}. These quality standards provide core foundation for assessing the quality of the application. 
+To facilitate the evaluation a set of criteria is derived from the core application quality standard described in Android Documentation \autocite{androidqualityguidelines}. \autoref{tab:qualitystandard} shows the criteria, along with the sub-characteristic as well as its relevance to the research project. These criteria will be reviewed during the evaluation process to assess the quality of the application developed in this research project.
 \input{chapters/ra/quality-standards-table.tex}
