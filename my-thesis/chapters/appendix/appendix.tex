@@ -6,6 +6,25 @@
 
 
 \section{Source Code}
+\begin{lstlisting}[caption={Implementation of EventBus (Kotlin - HeartrateEventBus)}]
+object HeartrateEventBus {
+    private val listeners = mutableListOf<(HeartrateEvent) -> Unit>()
+
+    fun subscribe(listener: (HeartrateEvent) -> Unit) {
+        listeners.add(listener)
+    }
+
+    fun unsubscribe(listener: (HeartrateEvent) -> Unit) {
+        listeners.remove(listener)
+    }
+
+    fun publish(event: HeartrateEvent) {
+        listeners.forEach { listener ->
+            listener.invoke(event)
+        }
+    }
+}
+\end{lstlisting}
 
 \section{Supplemental Figures}
 \begin{figure}[H]
