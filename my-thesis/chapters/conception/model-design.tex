@@ -8,15 +8,18 @@ To gain a better overview and understanding of the entities inside the system, a
     \caption{Entity class diagram}
     \label{fig:entity_diagram}
 \end{figure}
-This diagram illustrates the main entities and its relationship with each other inside the system. As described by the diagram, the main entities in the system consist of \emph{user}, \emph{exercise}, \emph{heartrate}. 
-Each \emph{user} within the system has one to many relationship with both \emph{heartrate} and \emph{exercise} entities. These relationships represent the connection between a \emph{user} and their corresponding \emph{heartrate} and \emph{exercise} records. 
+{{\ttfamily \hyphenchar\the\font=`\-}
+\autoref{fig:entity_diagram} visualizes the main entities and its relationship with each other inside the system. As illustrated by the diagram, the main entities in the system consist of \texttt{User}, \texttt{Exercise}, \texttt{Heartrate}. 
+Each \texttt{User} within the system has one to many relationship with both \texttt{Heartrate} and \texttt{Exercise} entities. These relationships represent the connection between a \texttt{User} and their corresponding \texttt{Heartrate} and \texttt{Exercise} records. 
 Once the entities have been defined, the system's functionalities can now be discussed based on the identified use cases.
+\par}
+
 
 \subsubsection{Heart Rate Monitor}
 \label{chap:hr_monitor_design}
-A system sequence can now be defined as a result of analyzing the following use case:
+A system sequence can now be defined as a result of analyzing the following user story:
 \begin{quotation}
-    \enquote{As a health-oriented user, I want the application to show my live heart rate so that I can monitor my cardiovascular activity.} 
+    \enquote{As a health-oriented user, I want to monitor my cardiovascular activity.} 
 \end{quotation}
 
 \begin{figure}[H]
@@ -26,22 +29,22 @@ A system sequence can now be defined as a result of analyzing the following use 
     \label{fig:connection_diagram}
 \end{figure}
 Since one of the requirements is to monitor real-time heart rate, it is mandatory to establish connection to the heart rate sensor and handle the broadcasted heart rate data. The user should have a way to easily connect and disconnect from the device as desired.
-The following sequence will be executed as a way to maintain connection to the BLE heart rate sensor and retrieve the heart rate data.
+The following sequence is visualized in \autoref{fig:connection_diagram} and it will be executed as a way to maintain connection to the BLE heart rate sensor and retrieve the heart rate data.
 \begin{enumerate}
-    \item A request to start the \emph{ConnectionService} is received.
+    \item A request to start the \texttt{ConnectionService} is received.
     \item The service initiates a bluetooth low energy connection to the heart rate sensor device.
-    \item After the connection has been established, the \emph{ConnectionService} listens to the heart rate data broadcasted by the heart rate sensor device.
+    \item After the connection has been established, the \texttt{ConnectionService} listens to the heart rate data broadcasted by the heart rate sensor device.
     \item The heart rate sensor broadcasts heart rate data.
     \item The service publishes an event containing the received heart rate data.
-    \item A request to stop the \emph{ConnectionService} is received.
+    \item A request to stop the \texttt{ConnectionService} is received.
     \item The service stops the connection with the heart rate sensor device.
 \end{enumerate}
 
 \subsubsection{Activity Monitor}
 \label{chap:activity_monitor_design}
-Based on the analysis of the following use case, a system sequence that outlines the sequence of actions and interactions within the system can now be established.
+Based on the analysis of the following user story, a system sequence that outlines the sequence of actions and interactions within the system can now be established.
 \begin{quotation}
-    \enquote{As an physically active individuals, I want the application to track and display my current activity so that I can keep track of my progress and make adjustments to my physical activities.} 
+    \enquote{As an physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities.} 
 \end{quotation}
 
 \begin{figure}[H]
@@ -51,10 +54,10 @@ Based on the analysis of the following use case, a system sequence that outlines
     \label{fig:activity_diagram}
 \end{figure}
 
-The following sequence illustrates the steps in monitoring the user's activity, which is one of the key use cases in the system:
+The following sequence in \autoref{fig:activity_diagram} illustrates the steps in monitoring the user's activity, which is one of the key use cases in the system:
 \begin{enumerate}
-    \item The \emph{ActivityService} actively listens to the heart rate event broadcasted by the \emph{ConnectionService}.
-    \item On heart rate event received, the \emph{ActivityService} classifies the user's current activity based on the user's current heart rate by using the formula mentioned in \autoref{chap:activity_intensity}
+    \item The \texttt{ActivityService} actively listens to the heart rate event broadcasted by the \texttt{ConnectionService}.
+    \item On heart rate event received, the \texttt{ActivityService} classifies the user's current activity based on the user's current heart rate by using the formula mentioned in \autoref{chap:activity_intensity}
     \item Once the heart rate is classified, the service publishes an event containing the current activity.
 \end{enumerate}
 
@@ -65,25 +68,25 @@ Based on the formula mentioned in \autoref{chap:energy_expenditure}, it is requi
 To facilitate this, it is recommended to create a record of exercise. The exercise should hold the attributes needed for the calculation of the energy expenditure.
 Prior to initiating an exercise, it is necessary for the user to establish a connection with the heart rate sensor. This ensures the availability of real-time heart rate data, which is vital for accurate energy expenditure calculations during the exercise.
 
-A system sequence can now be defined as a result of analyzing the following use case:
+A system sequence can now be defined as a result of analyzing the following user story:
 \begin{quotation}
-    \enquote{As a fitness enthusiast, I want the application to calculate and display the number of calories burned based in my exercises. This allows me to keep track of my progress and make adjustments to my exercises.} 
+    \enquote{As a fitness enthusiast, I want to know the number of calories burned in my exercises. This allows me to keep track of my progress and make adjustments to my exercises.} 
 \end{quotation}
 
-The following sequence is executed as a way to track the current exercise and calculate the energy expenditure:
+The following sequence is illustrated in \autoref{fig:start_exercise_diagram} and it is executed as a way to track the current exercise and calculate the energy expenditure:
 \begin{enumerate}
     \item A request to start the exercise is received.
-    \item The \emph{ExerciseService} retrieves the active exercise from the repository, which is automatically created and set active by the \emph{ExerciseViewModel} when the user starts the exercise
+    \item The \texttt{ExerciseService} retrieves the active exercise from the repository, which is automatically created and set active by the \texttt{ExerciseViewModel} when the user starts the exercise
     \item active exercise is returned
-    \item The \emph{ExerciseService} actively listens to the heart rate event broadcasted by the \emph{ConnectionService}.
+    \item The \texttt{ExerciseService} actively listens to the heart rate event broadcasted by the \texttt{ConnectionService}.
     \item Retrieved heart rate event.
-    \item The \emph{ExerciseService} processes active exercise. In this process, the attributes within the exercise such as average bpm and burned calories are calculated.
-    \item The \emph{ExerciseService} publishes an event containing the processed exercise.
+    \item The \texttt{ExerciseService} processes active exercise. In this process, the attributes within the exercise such as average bpm and burned calories are calculated.
+    \item The \texttt{ExerciseService} publishes an event containing the processed exercise.
     \item The processed exercise is persisted to the database.
     \item The persisted exercise is returned.
     \item A request to stop the exercise is received.
     \item The active exercise is marked as done.
-    \item The \emph{ExerciseService} publishes an event containing the completed exercise.
+    \item The \texttt{ExerciseService} publishes an event containing the completed exercise.
     \item The completed exercise is persisted to the database.
     \item The persisted exercise is returned.
 \end{enumerate}
@@ -99,10 +102,10 @@ The following sequence is executed as a way to track the current exercise and ca
 As the \emph{services} need to communicate with each other, it is very advantageous to implement an event bus architecture pattern based on the observable pattern described in Design Patterns \autocite{gamma1995design}. 
 It involves using an event bus as a central hub for publishing and subscribing to events. Components can publish events to the bus without needing to know the receivers, and they can subscribe to specific types of events without knowing the publishers.
 This promotes loose coupling as the components only need to know the event bus and not the other components.
-In the context of this project, there are three major event bus: \emph{HrEventBus}, which handles events related to heart rate data; \emph{ActivityEventBus}, responsible for managing events related to activity status; and lastly \emph{ExerciseEventBus}, dedicated to handling exercise events.
+In the context of this project, there are three major event bus: \texttt{HrEventBus}, which handles events related to heart rate data; \texttt{ActivityEventBus}, responsible for managing events related to activity status; and lastly \texttt{ExerciseEventBus}, dedicated to handling exercise events.
 
 \subsubsection{Profile Management}
-According to the defined use cases, it is essential to develop a functionality that enables users to manage their personal data. This functionality includes creating a new user profile, allowing users to modify their existing data, and lastly providing the users the capability to permanently delete their own data. These features will be implemented at the \emph{view model} level as the \emph{view model} handles the data manipulation, ensuring efficient data management and user control.
+According to the defined use cases in \autoref{chap:use_case}, it is essential to develop a functionality that enables users to manage their personal data. This functionality includes creating a new user profile, allowing users to modify their existing data, and lastly providing the users the capability to permanently delete their own data. These features will be implemented at the \emph{view model} level as the \emph{view model} handles the data manipulation, ensuring efficient data management and user control.
 It will be discussed on \autoref{chap:viewmodel_design}
 
 

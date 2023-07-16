@@ -1,4 +1,4 @@
-\begin{lstlisting}[caption={Room Database Configuration (Kotlin)}]
+\begin{lstlisting}[caption={Room Database Configuration (Kotlin)}, label={list:database_config}]
 @Database(entities = [User::class, Exercise::class, Heartrate::class], version = 4)
     @TypeConverters(DateTypeConverter::class, TimestampTypeConverter::class)
     abstract class HamDatabase: RoomDatabase() {

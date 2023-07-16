@@ -22,7 +22,7 @@ The CI/CD pipeline is configured to be triggered automatically when there is a p
 This ensures that the code changes go through a standardized build and test process, maintaining the overall quality and stability of the project.
 
 \subsection{Database}
-In this project, Room is utilized as the database framework, which is based on SQLite. Room database is configured in kotlin as the following:
+In this project, Room is utilized as the database framework, which is based on SQLite. Room database is configured in kotlin as shown in \autoref{list:database_config}:
 \input{chapters/Implementation/listings/db-listing.tex}
 The database schema consists of three entities: user, exercise, and heartrate, each representing a distinct data model.
 These data access objects\footnote{\emph{Data Access Object (DAO)} serves as the main access point for interacting with the database. URL: \url{https://developer.android.com/training/data-storage/room/accessing-data}}: UserDao, ExerciseDao, heartrateDao, are configured, allowing interaction with the database. These DAOs define methods for querying data specific to each entities to the database.

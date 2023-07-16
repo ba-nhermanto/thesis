@@ -5,10 +5,10 @@ It is responsible for displaying the pre-defined functionalities in \autoref{cha
 Several mock-ups have been designed using the UI design tool UIzard\footnote{UIzard is a UI design tool used for designing wireframes, mockups, and prototypes. Homepage: \url{https://uizard.io/}} to provide a clearer visualization of the layout of the user interface.
 
 \subsubsection{HomeFragment}
-The \emph{HomeFragment} serves as the main screen of the application, providing an overview of the user's health and activity-related functionalities defined in \autoref{chap:hr_monitor_design}. This \emph{view} consists of various components, including real-time heart rate display and activity monitor.
+The \texttt{HomeFragment} serves as the main screen of the application, providing an overview of the user's health and activity-related functionalities defined in \autoref{chap:hr_monitor_design}. This \emph{view} consists of various components, including real-time heart rate display and activity monitor.
 The real-time heart rate display dynamically shows the user's live heart rate, allowing them to track their cardiovascular activity. Additionally, it features a dynamic graph that visualizes the user's heart rate history, which enables them to track their heart rate patterns over time.
 The activity monitor informs the user's current activity intensity based on their current heart rate, which enables them to track their activity intensity and adjust their current activity intensity according to their needs. As mentioned in \autoref{chap:activity_intensity}, the intensity levels range from very light, light, moderate, hard, and very hard.
-
+\autoref{fig:homefragment_mockup} shows the mockup designed with UIzard.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{images/home-fragment-mockup.png}
@@ -16,15 +16,15 @@ The activity monitor informs the user's current activity intensity based on thei
     \label{fig:homefragment_mockup}
 \end{figure}
 
-As part of the real-time tracking and display of heart rate and current activity, the following sequence is executed:
+As part of the real-time tracking and display of heart rate and current activity, the following sequence visualized in \autoref{fig:homefragment_diagram} is executed:
 \begin{enumerate}
     \item A switch is pressed to connect the application to the heart rate sensor.
-    \item A request to start connection service is sent to the \emph{ConnectionServiceManager}.
-    \item The \emph{ConnectionService} is started.
-    \item \emph{HomeFragment} actively observes the heart rate live data from \emph{HrViewModel}.
-    \item \emph{HomeFragment} actively observes the current activity live data from \emph{HrViewModel}.
-    \item when the values from both the live data change, \emph{HomeFragment} is notified.
-    \item \emph{HomeFragment} updates the UI according to the data changes.
+    \item A request to start connection service is sent to the \texttt{ConnectionServiceManager}.
+    \item The \texttt{ConnectionService} is started.
+    \item \texttt{HomeFragment} actively observes the heart rate live data from \texttt{HrViewModel}.
+    \item \texttt{HomeFragment} actively observes the current activity live data from \texttt{HrViewModel}.
+    \item when the values from both the live data change, \texttt{HomeFragment} is notified.
+    \item \texttt{HomeFragment} updates the UI according to the data changes.
 
 \end{enumerate}
 
@@ -35,61 +35,61 @@ As part of the real-time tracking and display of heart rate and current activity
     \label{fig:homefragment_diagram}
 \end{figure}
 
-As part of the requirements, the user interface must facilitate the functionality to stop the connection between the application and the heart rate sensor. Therefore, the following sequence is needed:
+As part of the requirements, the user interface must facilitate the functionality to stop the connection between the application and the heart rate sensor. 
+The following sequence describes \autoref{fig:homefragment_stop_connection_diagram}:
 \begin{enumerate}
     \item A switch is pressed to disconnect the application to the heart rate sensor.
-    \item A request to stop connection service is sent to the \emph{ConnectionServiceManager}.
-    \item The \emph{ConnectionService} is stopped.
-    \item \emph{HomeFragment} updates the UI accordingly.
+    \item A request to stop connection service is sent to the \texttt{ConnectionServiceManager}.
+    \item The \texttt{ConnectionService} is stopped.
+    \item \texttt{HomeFragment} updates the UI accordingly.
 \end{enumerate}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{diagrams/stop-connection-service-homefragment.drawio.png}
+    \includegraphics[width=0.8\textwidth]{diagrams/stop-connection-service-homefragment.drawio.png}
     \caption{HomeFragment stop connection sequence diagram}
     \label{fig:homefragment_stop_connection_diagram}
 \end{figure}
 
 
 \subsubsection{ExerciseFragment}
-The \emph{ExerciseFragment} serves as the main component for presenting exercise details and displaying the calculation of energy expenditure. 
-It shows an overview of the exercise, allowing users to access relevant information.
-The exercise displayed in the ExerciseFragment is connected to the ExerciseLiveData within the ExerciseViewModel. This connection is established through data binding\footnote{\emph{Data Binding} binds UI components in layouts to data sources in the app using a declarative format rather than programmatically. URL: \url{https://developer.android.com/topic/libraries/data-binding}}, ensuring automatic updates when the data changes. 
-As part of calculating the energy expenditure, the \emph{ExerciseFragment} facilitates intuitive controls to start and stop the exercise so that the data can be captured effectively. As a result, the following sequence is executed:
-
-\begin{enumerate}
-    \item A button is pressed to start the exercise.
-    \item A request to start the exercise is sent to the \emph{ExerciseServiceManager}.
-    \item The \emph{ExerciseService} is started.
-    \item \emph{HomeFragment} actively observes the exercise live data from \emph{ExerciseViewModel}.
-    \item When the values from the live data change, \emph{ExerciseFragment} is notified.
-    \item \emph{ExerciseFragment} updates the UI according to the data changes.
-    \item A button is pressed to stop the exercise.
-    \item A request to stop the exercise is sent to the \emph{ExerciseServiceManager}.
-    \item The \emph{ExerciseService} is stopped.
-    \item \emph{ExerciseFragment} updates the UI accordingly.
-\end{enumerate}
-
+The \texttt{ExerciseFragment} serves as the main component for presenting exercise details and displaying the calculation of energy expenditure. 
+As visualized by \autoref{fig:exercisefragment_mockup}, it is designed to show an overview of the exercise, allowing users to access relevant information.
+The exercise displayed in the \texttt{ExerciseFragment} is connected to the \texttt{ExerciseLiveData} within the \texttt{ExerciseViewModel}. This connection is established through data binding\footnote{\emph{Data Binding} binds UI components in layouts to data sources in the app using a declarative format rather than programmatically. URL: \url{https://developer.android.com/topic/libraries/data-binding}}, ensuring automatic updates when the data changes. 
+As part of calculating the energy expenditure, the \texttt{ExerciseFragment} facilitates controls to start and stop the exercise so that the data can be captured effectively.
+\newline
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{diagrams/start-ex-frag.drawio.png}
     \caption{ExerciseFragment start exercise sequence diagram}
     \label{fig:exercisefragment_start_diagram}
 \end{figure}
-
+\autoref{fig:exercisefragment_start_diagram} demonstrates the following sequence to provide control over the exercise process.
+\begin{enumerate}
+    \item A button is pressed to start the exercise.
+    \item A request to start the exercise is sent to the \texttt{ExerciseServiceManager}.
+    \item The \texttt{ExerciseService} is started.
+    \item \texttt{HomeFragment} actively observes the exercise live data from \texttt{ExerciseViewModel}.
+    \item When the values from the live data change, \texttt{ExerciseFragment} is notified.
+    \item \texttt{ExerciseFragment} updates the UI according to the data changes.
+    \item A button is pressed to stop the exercise.
+    \item A request to stop the exercise is sent to the \texttt{ExerciseServiceManager}.
+    \item The \texttt{ExerciseService} is stopped.
+    \item \texttt{ExerciseFragment} updates the UI accordingly.
+\end{enumerate}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/exercise-fragment-mockup.png}
+    \includegraphics[width=0.65\textwidth]{images/exercise-fragment-mockup.png}
     \caption{ExerciseFragment mock-up}
     \label{fig:exercisefragment_mockup}
 \end{figure}
 
 \subsubsection{UserFragment}
-The \emph{UserFragment} serves as the main component for managing user-related information. 
-The \emph{UserFragment} presents an overview of the user's data, allowing users to view and manage their data conveniently. 
+The \texttt{UserFragment} serves as the main component for managing user-related information. 
+The \texttt{UserFragment} presents an overview of the user's data, allowing users to view and manage their data conveniently. 
 It offers an organized and user-friendly display, enabling users to access their profile and manage their data, including deleting their data.
-The user data is displayed in a user-friendly and editable format within a TextField. This allows users to view and conveniently modify their data. 
+The user data is displayed in a user-friendly and editable format within a TextField as illustrated in \autoref{fig:userfragment_mockup}. This allows users to view and conveniently modify their data. 
 The TextField provides a responsive and interactive interface, enabling users to easily input or update their information. 
 
 \begin{figure}[H]
@@ -99,13 +99,13 @@ The TextField provides a responsive and interactive interface, enabling users to
     \label{fig:userfragment_mockup}
 \end{figure}
 
-To fulfill the requirements, the \emph{UserFragment} must facilitate adding a new user and updating their data. The functionalities to add a new user and to update their data share the same sequence of operations in the \emph{view} level with the only difference is the button.
-As a result, the following sequence of operations is created to support the functionality to add a new user and to update their data.
+To fulfill the requirements, the \texttt{UserFragment} must facilitate adding a new user and updating their data. The functionalities to add a new user and to update their data share the same sequence of operations in the \emph{view} level with the only difference is the button.
+As a result, the following sequence of operations is illustrated by \autoref{fig:userfragment_add_new_user} and it supports the functionality to add a new user and to update their data.
 
 \begin{enumerate}
     \item A button to add new user or a button to update user is pressed.
     \item User data is retrieved from the input and validated.
-    \item User data sent to \emph{UserViewModel} to be persisted in the database.
+    \item User data sent to \texttt{UserViewModel} to be persisted in the database.
     \item Saved user is returned
     \item The UI is updated according to the saved user.
 \end{enumerate}
@@ -118,19 +118,19 @@ As a result, the following sequence of operations is created to support the func
 \end{figure}
 
 To meet the requirement of deleting user data, the UserFragment is designed to handle this functionality. 
-To support this functionality, the following sequence of operation is implemented:
+To support this functionality, the following sequence of operation is implemented and visualized in \autoref{fig:userfragment_delete_user}:
 
 \begin{enumerate}
     \item A button to delete user is pressed.
-    \item A request to delete user is sent to \emph{UserViewModel}.
-    \item The \emph{UserViewModel} validates if there are running \emph{ConnectionService/ExerciseService/ActivityService}.
+    \item A request to delete user is sent to \texttt{UserViewModel}.
+    \item The \texttt{UserViewModel} validates if there are running \texttt{ConnectionService/ExerciseService}.
     \item If the validation passed, the user will be deleted.
-    \item The UI is updated, if there are still users left, the \emph{UserFragment} displays the next user, otherwise it will show nothing.
+    \item The UI is updated, if there are still users left, the \texttt{UserFragment} displays the next user, otherwise it will show nothing.
 \end{enumerate}
 
 Alternate sequence:
 \begin{enumerate}[start=4]
-    \item If the validation failed, the user will not be deleted and instead the \emph{UserFragment} notifies the user about the running services.
+    \item If the validation failed, the user will not be deleted and instead the \texttt{UserFragment} notifies the user about the running services.
 \end{enumerate}
 
 

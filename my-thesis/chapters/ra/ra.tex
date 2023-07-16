@@ -2,7 +2,7 @@
 This chapter includes analysis of the requirements of the system based on the problem statement described in the previous chapter. Furthermore, the main goal of the software as well as other specifications will be analyzed.
 
 \section{Goal}
-The goal of this research project is to build a functional prototype of a mobile application that monitors users' health and activity by observing users' heart rate. To observe one's heart rate, the application will be establish connection to a heart rate sensor via bluetooth low energy.
+The goal of this research project is to build a functional prototype of a mobile application that monitors users' health and activity by observing users' heart rate. To observe one's heart rate, the application will establish connection to a heart rate sensor via bluetooth low energy.
 With the help of bluetooth low energy connection, the sensor is able to broadcast heart rate data to the application while consuming minimal energy.
 The retrieved data will be stored in local database instead of cloud services or wearable devices to ensure data privacy. The user will also be given full control over their data, allowing them to modify or delete their data according to their will at anytime.
 The retrieved data can be accessed later for visualization purposes as long as it is available. Furthermore, the application should be able to calculate users' energy expenditure during their exercise based on their heart rate, age, gender, weight, duration of exercise.
@@ -10,9 +10,9 @@ The retrieved data can be accessed later for visualization purposes as long as i
 \section{State of the Art}
 Health monitoring using wearable devices has gained immense popularity, enabling individuals to conveniently monitor their health and fitness. Bluetooth low energy (BLE) plays an important role in establishing connection between wearable device, which acts as a sensor, and the application. 
 BLE offers real-time data exchange while consuming low power, which allows for long-term deployment without the need of frequent battery change. \cite{strey2013ble}
-Existing health and activity monitor applications utilizing BLE offer a range of features and functionalities such as heart rate, calories burned, sleep patterns.
+Existing applications utilizing BLE offer a range of features and functionalities such as heart rate, calories burned, sleep patterns.
 
-Nevertheless, as mentioned earlier, the challenges remain in maintaining a straightforward application and ensuring users' privacy. The aim in this research project is to explore the possibilities of improving health and wellbeing of the user by providing real-time data on their heart rate while providing users full control over their own data.
+Nevertheless, the challenges remain in maintaining a straightforward application and ensuring users' privacy. The aim in this research project is to explore the possibilities of improving health and wellbeing of the user by providing real-time data on their heart rate while providing users full control over their own data.
 By addressing these challenges, this research project intends to develop a prototype of a more user- and privacy-friendly health activity monitor application using BLE.
 \newpage
 
@@ -30,7 +30,7 @@ A use case diagram is created to provide a clearer understanding of how the syst
     \label{fig:use_cases}
 \end{figure}
 \newpage
-The use case diagram provides visual presentation of the primary system functionalities and identifies the actor that interacts with the system.
+\autoref{fig:use_cases} provides visual presentation of the primary system functionalities and identifies the actor that interacts with the system.
 The system includes several use cases to provide a comprehensive experience for monitoring health and activity while ensuring user's data privacy.
 
 The primary use case, "Monitor Health", allows users to track important health indicators such as heart rate, calories burned, and current activity. It consists of three sub-use cases: "Display Real-Time Heart Rate", which shows the user's live heart rate on the application's interface; "Calculate Calories Burned", which calculates the number of calories burned in an exercise based on the user's heart rate;  "Monitor Activity", which observes the user's ongoing physical activity. In addition, the system includes "Manage User Profile" use case, which handles user profile management and data manipulation. Users can update or insert or delete data anytime using the respective sub-use cases. By integrating these use cases, the system effectively monitor health metrics and allows user to conveniently manage their data.
