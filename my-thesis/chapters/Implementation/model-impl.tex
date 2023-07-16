@@ -42,10 +42,12 @@ This subsection provides the details of the implementation of the services withi
 
 \subsubsection{Connection Service}
 The implementation of the \verb;ConnectionService; follows the concept outlined in \autoref{chap:hr_monitor_design}. It focuses on establishing a connection with the heart rate sensor and listening to the heart rate data broadcasted by the heart rate sensor. 
-It is implemented as a \verb;Service; class\footnote{A \url{Service} is an application component that can perform long-running operations in the background. URL: \url{https://developer.android.com/guide/components/services}} provided by Android, allowing it to run in the background even when the application is not in the foreground.
+It is implemented as a \verb;Service; class\footnote{A \emph{Service} is an application component that can perform long-running operations in the background. URL: \url{https://developer.android.com/guide/components/services}}, allowing it to run in the background even when the application is not in the foreground.
 
 The lifecycle of the \verb;ConnectionService; is managed by \verb;ConnectionServiceManager;, which handles the start and stop operations. 
-When the service is started, it automatically initiates the connection with the heart rate sensor and \verb;ConnectionServiceManager; sends the active user's device id to \verb;ConnectionService; as it is required to start the connection. 
+\texttt{ConnectionServiceManager} sends the active user's device id, attaching it to the \texttt{Intent}\footnote{\emph{Intent} is used to start, stop, and communicate with \emph{Service}. URL: \url{https://developer.android.com/reference/android/content/Intent}} used to initiate the \texttt{ConnectionService},
+as the device id is required to start a connection to the heart rate sensor.
+When the service is started, it automatically initiates the connection with the heart rate sensor.
 \begin{lstlisting}[caption={Function to start ConnectionService (Kotlin - ConnectionServiceManager)}]
 fun startConnectionService(context: Context, activeUser: User) {
     try {
@@ -60,7 +62,7 @@ fun startConnectionService(context: Context, activeUser: User) {
 \end{lstlisting}
 
 To establish the connection with the heart rate sensor, the \verb;ConnectionService; utilizes the PolarBleSdk library.
-\begin{lstlisting}[caption={Function to initiate connection to heart rate sensor (ConnectionService)}]
+\begin{lstlisting}[caption={Function to initiate connection to heart rate sensor (Kotlin - ConnectionService)}]
 private fun connectPolar(polarId: String) {
     polarBleApi.run {
         setApiLogger { s: String? -> Log.d(TAG, "CONNECTION_SERVICE LOGGER $s") }
@@ -81,7 +83,7 @@ private fun connectPolar(polarId: String) {
 
 Once the connection to the heart rate sensor is established, \verb;ConnectionService; listens to the broadcasted heart rate data and publishes the data to \verb;HrEventBus;.
 This allows other components of the system, such as the \verb;HrViewModel;, to subscribe to the \verb;HrEventBus; and receive real-time heart rate updates. 
-\begin{lstlisting}[caption={Heart rate data broadcast listener (ConnectionService)}]
+\begin{lstlisting}[caption={Heart rate data broadcast listener (Kotlin - ConnectionService)}]
 polarBleApi.startListenForPolarHrBroadcasts(null)
     .subscribe(
         { polarBroadcastData: PolarHrBroadcastData ->
@@ -103,7 +105,7 @@ The \verb;ActivityService; is implemented based on \autoref{chap:activity_monito
 First, it listens to the \verb;HrEventBus;, which receives real-time heart rate data from the \verb;ConnectionService;. 
 By subscribing to the \verb;HrEventBus;, the \verb;ActivityService; receives the latest heart rate data.
 Every time heart rate data is received, this service determines the user's current activity based \autoref{chap:activity_intensity}.
-\begin{lstlisting}[caption={Activity classifier (ActivityService)}]
+\begin{lstlisting}[caption={Activity classifier (Kotlin - ActivityService)}]
 private fun activityClassifier(bpm: Int, user: User) : Activity {
     val maxBpm = user.getMaxBpm()
     val veryLightBpm = maxBpm * Activity.VERY_LIGHT.intensity
@@ -132,14 +134,14 @@ It records exercises done by the users and calculate the energy expenditure in t
 
 Similar to the \verb;ConnectionService;, the lifecycle of the \verb;ExerciseService; is managed by another class named \verb;ExerciseServiceManager;, which handles the start and stop operations. 
 When the service starts, it finds an active exercise and active user within the database. 
-\begin{lstlisting}[caption={On service started (ExerciseService)}]
+\begin{lstlisting}[caption={On ExerciseService started (Kotlin - ExerciseService)}]
     activeExercise = exerciseRepository.getActiveExercise()
     setUser(activeExercise.userId) // this is a wrapper function to find and set active user in the service level
 \end{lstlisting}
 
 For the calculation of burned calories, \verb;ExerciseService; needs the user's heart rate, To retrieve the actual heart rate data, it actively listens to \verb;HeartrateEvent; published to \verb;HeartrateEventBus;.
 Every time heart rate event is received, \verb;ExerciseService; adds the heart rate bpm into a collection of \verb;Int; and updates the active exercise. The update process includes burned calories calculation based on \autoref{chap:energy_expenditure}. 
-\begin{lstlisting}[caption={Process active exercise (ExerciseService)}]
+\begin{lstlisting}[caption={Process active exercise snippet (Kotlin - ExerciseService)}]
     listOfHr.add(bpm)
 
     activeExercise.averageHrBpm = listOfHr.average().toInt()
@@ -153,7 +155,12 @@ Every time heart rate event is received, \verb;ExerciseService; adds the heart r
     }
 \end{lstlisting}
 
-To prevent \url{ANR}\footnote{\emph{Android Not Responsive (ANR)} occurs when the main thread is blocked. URL: \url{https://developer.android.com/topic/performance/vitals/anr}}, the process to save the exercise to the database is run on a coroutine.
+To prevent \url{ANR}\footnote{\emph{Android Not Responsive (ANR)} occurs when the main thread is blocked. URL: \url{https://developer.android.com/topic/performance/vitals/anr}}, the process to save the exercise to the database is run on a \emph{coroutine}\footnote{A \emph{coroutine} is a concurrency design pattern that you can use on Android to simplify code that executes asynchronously. URL: \url{https://developer.android.com/kotlin/coroutines}}.
 Once the exercise is updated and saved, it will be published to \verb;ExerciseEventBus;, which allows \verb;ExerciseViewModel; to be up-to-date with the active exercise.
 
 When the service is stopped by \verb;ExerciseServiceManager;, the service unsubscribes from the \verb;HeartrateEventBus;, mark the exercise as done, process the exercise and finally publish it to \verb;ExerciseEventBus;.
+\begin{lstlisting}[caption={On exercise stopped snippet (Kotlin - ExerciseService)}]
+    activeExercise.done = true
+    HeartrateEventBus.unsubscribe(hrListener)
+    processExerciseAndPublish()
+\end{lstlisting}
