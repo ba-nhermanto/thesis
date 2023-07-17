@@ -34,7 +34,7 @@ The following sequence is visualized in \autoref{fig:connection_diagram} and it 
     \item A request to start the \texttt{ConnectionService} is received.
     \item The service initiates a bluetooth low energy connection to the heart rate sensor device.
     \item After the connection has been established, the \texttt{ConnectionService} listens to the heart rate data broadcasted by the heart rate sensor device.
-    \item The heart rate sensor broadcasts heart rate data.
+    \item The broadcasted heart rate data is received.
     \item The service publishes an event containing the received heart rate data to the \texttt{HrEventBus}.
     \item A request to stop the \texttt{ConnectionService} is received.
     \item The service stops the connection with the heart rate sensor device.
@@ -77,7 +77,7 @@ The following sequence is illustrated in \autoref{fig:start_exercise_diagram} an
 \begin{enumerate}
     \item A request to start the exercise is received.
     \item The \texttt{ExerciseService} retrieves the active exercise from the repository, which is created and set active by the \texttt{ExerciseViewModel} when the user starts the exercise
-    \item active exercise is returned
+    \item Active exercise is returned
     \item The \texttt{ExerciseService} actively listens to the heart rate event broadcasted by the \texttt{ConnectionService}.
     \item Heart rate event is retrieved.
     \item The \texttt{ExerciseService} processes active exercise. In this process, the attributes within the exercise such as average bpm and burned calories are calculated.
