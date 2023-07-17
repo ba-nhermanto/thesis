@@ -10,13 +10,13 @@ The diagram presented in \autoref{fig:soft_diagram} helps to gain better underst
 \end{figure}
 The project follows the Model-View-ViewModel (MVVM) architectural pattern. The user interface, which is responsible for displaying the features to the user, represents the \emph{view}. 
 The \emph{model} represents the business logic of the application, for instance, the entities and the functionalities such as live heart rate monitor, activity monitoring, exercise service, and user data management. 
-The \emph{view model} facilitate the communications between the \emph{models} and the \emph{views} through which the \emph{views} can access and interact with the data and operations of the \emph{models}.
+The \emph{view models} facilitate the communications between the \emph{models} and the \emph{views} through which the \emph{views} can access and interact with the data and operations of the \emph{models}.
 
 The user interface consists of three main components which extends \texttt{Fragment}\footnote{Based on The Official Android Documentation, a Fragment represents a reusable portion of your app's UI. A fragment defines and manages its own layout, has its own lifecycle, and can handle its own input events. \autocite{android-fragments}}. 
 The \texttt{HomeFragment} displays real-time heart rate data and the activity monitor. It serves as the initial entry point for the users as they log in to the application. As it shows live heart rate data and activity, it holds a connection to the \texttt{HrViewModel}.
 The \texttt{ExerciseFragment} presents the number of calories burned in an exercise based on the user's heart rate. It maintains a connection with the \texttt{ExerciseViewModel}. Lastly, the \texttt{UserFragment}, which is connected to the \texttt{UserViewModel}, displays the user's data and provide the necessary UI components to support data management.
 
-The backend is in charge of the core functionalities of the application, which involve establishing a connection to the database.
+The backend, which represents the \emph{model}, is in charge of the core functionalities of the application, which involve establishing a connection to the database.
 As one of the core components, the \texttt{ConnectionService} maintains the connection between the BLE heart rate sensor device and the application. Additionally, it actively listens to the heart rate data being broadcasted by the sensor. 
 The \texttt{ActivityService} determines the current activity status based on the user's heart rate and age. 
 On the other hand, the \texttt{ExerciseService} tracks the user's energy expenditure during training based on the user's heart rate and physical measurements such as weight, age, and gender. Both the \texttt{ExerciseService} and \texttt{ActivityService} subscribe to an event, where the heart rate data is published by the \texttt{ConnectionService}. This enables the services to receive the heart rate data seamlessly and process it accordingly.

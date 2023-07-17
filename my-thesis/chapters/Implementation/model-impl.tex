@@ -1,6 +1,6 @@
 \section{Model}
 \label{chap:model_impl}
-This chapter explains implementation details of the model defined in \autoref{chap:model_design}.
+This chapter explains implementation details of the \emph{models} defined in \autoref{chap:model_design}.
 
 \subsection{Entities and Relationship}
 \label{chap:objectmodel_impl}
@@ -45,9 +45,9 @@ The implementation of the \verb;ConnectionService; follows the concept outlined 
 It is implemented as a \verb;Service; class\footnote{A \emph{Service} is an application component that can perform long-running operations in the background. URL: \url{https://developer.android.com/guide/components/services}}, allowing it to run in the background even when the application is not in the foreground.
 
 The lifecycle of the \verb;ConnectionService; is managed by \verb;ConnectionServiceManager;, which handles the start and stop operations. 
-\texttt{ConnectionServiceManager} sends the active user's device id, attaching it to the \texttt{Intent}\footnote{\emph{Intent} is used to start, stop, and communicate with \emph{Service}. URL: \url{https://developer.android.com/reference/android/content/Intent}} used to initiate the \texttt{ConnectionService},
+\texttt{ConnectionServiceManager} sends the active user's device id to the \texttt{ConnectionService} by attaching it to the \texttt{Intent}\footnote{\emph{Intent} is used to start, stop, and communicate with \emph{Service}. URL: \url{https://developer.android.com/reference/android/content/Intent}} used to initiate the \texttt{ConnectionService},
 as the device id is required to start a connection to the heart rate sensor.
-When the service is started, it automatically initiates the connection with the heart rate sensor.
+When the service starts, it automatically initiates the connection with the heart rate sensor.
 \begin{lstlisting}[caption={Function to start ConnectionService (Kotlin - ConnectionServiceManager)}]
 fun startConnectionService(context: Context, activeUser: User) {
     try {
@@ -104,7 +104,7 @@ On the other hand, when the service is stopped by the \verb;ConnectionServiceMan
 The \verb;ActivityService; is implemented based on \autoref{chap:activity_monitor_design}.
 First, it listens to the \verb;HrEventBus;, which receives real-time heart rate data from the \verb;ConnectionService;. 
 By subscribing to the \verb;HrEventBus;, the \verb;ActivityService; receives the latest heart rate data.
-Every time heart rate data is received, this service determines the user's current activity based \autoref{chap:activity_intensity}.
+Every time heart rate data is received, this service determines the user's current activity according to \autoref{chap:activity_intensity}.
 \begin{lstlisting}[caption={Activity classifier (Kotlin - ActivityService)}]
 private fun activityClassifier(bpm: Int, user: User) : Activity {
     val maxBpm = user.getMaxBpm()
@@ -133,10 +133,10 @@ The implementation of this service follows the design described in \autoref{chap
 It records exercises done by the users and calculate the energy expenditure in that exercise.
 
 Similar to the \verb;ConnectionService;, the lifecycle of the \verb;ExerciseService; is managed by another class named \verb;ExerciseServiceManager;, which handles the start and stop operations. 
-When the service starts, it finds an active exercise and active user within the database. 
+When the user starts an exercise, meaning the \texttt{ExerciseService} starts, it finds an active exercise created by \texttt{ExerciseViewModel} and the active user within the database. 
 \begin{lstlisting}[caption={On ExerciseService started (Kotlin - ExerciseService)}]
     activeExercise = exerciseRepository.getActiveExercise()
-    setUser(activeExercise.userId) // this is a wrapper function to find and set active user in the service level
+    setUser(activeExercise.userId) // this is a wrapper function to find and set active user in the ExerciseService level
 \end{lstlisting}
 
 For the calculation of burned calories, \verb;ExerciseService; needs the user's heart rate, To retrieve the actual heart rate data, it actively listens to \verb;HeartrateEvent; published to \verb;HeartrateEventBus;.

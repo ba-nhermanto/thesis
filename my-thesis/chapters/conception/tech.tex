@@ -1,6 +1,7 @@
 \section{Technologies}
 \label{chap:tech}
-This section provides an overview of the key technologies required to develop the application. It is important to note that different technologies have their own advantages and disadvantages. Therefore, the goal of this phase is not to find the best technology, but rather to find the most suitable technologies based on the goal of this project and preferences of the writer. 
+This section provides an overview of the key technologies required to develop the application. 
+The goal of this phase is to find the most suitable technologies based on the goal of this project and preferences of the writer. 
 Android with Kotlin is chosen as the development platform for this project due to its widespread popularity and compatibility with the Model-View-ViewModel architectural pattern. Additionally, Android offers a wide range of development tools and resources, making it suitable for this project.
 
 \subsection{User Interface}
@@ -11,7 +12,7 @@ As mentioned before, the backend of the application is developed using Kotlin wi
 Furthermore, Kotlin provides pre-defined classes such as the \emph{Service}\footnote{Based on The Official Android Documentation, \emph{Service} is an application component that can perform long-running operations in the background.\autocite{android-services}} class, which enables smooth execution of long running task. In the scope of this project, \emph{Service} class is especially useful to implement the \texttt{ConnectionService} and \texttt{ExerciseService}.
 
 \subsection{Database}
-A database is required to store and manage data related to the \emph{model}. In the context of this project, ROOM\footnote{\emph{ROOM} is a persistence library that provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite. URL: \url{https://developer.android.com/jetpack/androidx/releases/room}} database, which is built on top of SQLite\footnote{\emph{SQLite} is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. Homepage: \url{https://www.sqlite.org/index.html}} has been selected as the application's database.
+A database is required to store and manage data. In the context of this project, ROOM\footnote{\emph{ROOM} is a persistence library that provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite. URL: \url{https://developer.android.com/jetpack/androidx/releases/room}} database, which is built on top of SQLite\footnote{\emph{SQLite} is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. Homepage: \url{https://www.sqlite.org/index.html}} has been selected as the application's database.
 
 \subsection{BLE Sensor Device}
 Once all the technologies required to develop the application have been decided, the next step is to select a suitable heart-rate sensor device. Considering factors like accuracy, performance, and affordability, Polar H9\footnote{\emph{Polar H9} is a heart rate sensor made by Polar. Homepage: \url{https://www.polar.com/en/sensors/h9-heart-rate-sensor}} is chosen as the preferred device due to its affordability and reputation for providing reliable heart-rate measurements and long battery life.

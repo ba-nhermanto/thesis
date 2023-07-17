@@ -1,14 +1,12 @@
 \subsection{ViewModel}
 \label{chap:viewmodel_design}
-The \emph{view model} plays a crucial role in the architecture of an application. It serves as the intermediary between the \emph{view} and the \emph{model}.
 The \emph{view model} is responsible for providing the necessary data and functionality to the \emph{view}, resulting in a clear separation between the \emph{view} and the \emph{model}.
-By decoupling these components, the \emph{view model} supports separation of concerns.
-In the system consists of three \emph{view models}, namely \texttt{HrViewModel}, responsible for managing business logics related to heart rate and activity data, \texttt{ExerciseViewModel}, which provides business logics for exercise related data, and lastly \texttt{UserViewModel}, responsible for managing business logics related to user.
+The system consists of three \emph{view models}, namely \texttt{HrViewModel}, responsible for managing business logics related to heart rate and activity data, \texttt{ExerciseViewModel}, which manages business logics for exercise related data, and lastly \texttt{UserViewModel}, responsible for managing business logics related to user.
 
 \subsubsection{HrViewModel}
 \label{chap:hrviewmodel_design}
 The \texttt{HrViewModel} is responsible for managing business logics related to the heart rate data and activity within the system.
-This \texttt{ViewModel} facilitates the communication between the \texttt{HomeFragment} and the business logics related to the heart rate data and activity, for instance, \texttt{ConnectionService} and \texttt{ActivityService}.
+This \emph{view model} facilitates the communication between the \texttt{HomeFragment} and the business logics related to the heart rate data and activity, for instance, \texttt{ConnectionService} and \texttt{ActivityService}.
 Additionally, it includes heart rate LiveData\footnote{\emph{LiveData} is an observable data holder class. LiveData follows the observable pattern and allows other components to observe changes in the data. URL: \url{https://developer.android.com/topic/libraries/architecture/livedata}} and activity LiveData, enabling the fragment to observe these data and receive updates whenever changes occur. This allows fragment to react accordingly and adjust the user interface correspondingly.
 Furthermore, the \texttt{HrViewModel} interacts with the repositories to perform necessary operations on heart rate data.
 Sequence diagrams are created to visually represent the sequence of operations executed in \texttt{HrViewModel}.
@@ -24,8 +22,8 @@ To provide the \texttt{HomeFragment} with the actual heart rate data, the follow
 \begin{enumerate}
     \item The \texttt{HrViewModel} actively listens to events published by the \texttt{ConnectionService} to \texttt{HrEventBus}.
     \item Event containing heart rate data is retrieved.
-    \item Heart rate from the event is extracted and sent to the repository to be persisted.
-    \item Heart rate is saved in the database via \texttt{HrRepository} and returned to \texttt{HrViewModel}
+    \item Heart rate from the event is extracted and sent to \texttt{HrRepository} to be persisted to the database.
+    \item Once the heart rate data is successfully saved, it is returned to \texttt{HrViewModel}
     \item \texttt{HrViewModel} updates the heart rate LiveData.
 \end{enumerate}
 
@@ -33,7 +31,7 @@ The following sequence of operations is visualized in \autoref{fig:hrviewmodel_a
 \begin{enumerate}
     \item The \texttt{HrViewModel} actively listens to events published in \texttt{ActivityEventBus}.
     \item Event containing activity data is retrieved.
-    \item \texttt{HrViewModel} updates the activity LiveData.
+    \item \texttt{HrViewModel} updates the activity LiveData with the retrieved activity data.
 \end{enumerate}
 
 \begin{figure}[H]
@@ -60,7 +58,7 @@ To support the \texttt{ExerciseFragment} with the actual exercise data, the foll
 \begin{enumerate}
     \item The \texttt{ExerciseViewModel} actively listens to events published in \texttt{ExerciseEventBus}.
     \item Event containing exercise data is retrieved.
-    \item The \texttt{ExerciseViewModel} updates the exercise LiveData.
+    \item The \texttt{ExerciseViewModel} updates the exercise LiveData with the retrieved exercise data.
 \end{enumerate}
 
 \subsubsection{UserViewModel}
@@ -82,9 +80,9 @@ The following sequence of operations displayed in \autoref{fig:userviewmodel_ups
 \begin{enumerate}
     \item The \texttt{UserViewModel} receives a request to update or insert user.
     \item The request is forwarded to \texttt{UserRepository} to be persisted in the database. Room database automatically searches for existing user in the database, if no user is found, it creates a new user, otherwise it updates the user.
-    \item The saved user is returned.
+    \item Once the user is successfully saved within the database, it is returned.
     \item The user list live data is updated with the saved user.
-    \item The saved user is marked as active.
+    \item The saved user is set as active.
     \item The \texttt{UserViewModel} updates the active user live data.
 \end{enumerate}
 
@@ -102,7 +100,7 @@ The functionality to delete user is supported through the following sequence of 
     \item \texttt{ServiceRunningChecker} validates if there are any running services
     \item Validation result is returned
     \item if there are no service running, \texttt{UserRepository} deletes the user.
-    \item The last created user is marked as active.
+    \item Once the user is successfully deleted, the last created user is marked as active.
     \item The \texttt{UserViewModel} updates the active user live data.
 \end{enumerate}
 

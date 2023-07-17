@@ -26,6 +26,16 @@ object HeartrateEventBus {
 }
 \end{lstlisting}
 
+\begin{lstlisting}[caption={Implementation of calorie calculation (Kotlin - ExerciseService)}]
+private fun calculateCalories(exercise: Exercise): Float {
+    return if (user.gender == Gender.MALE) {
+        (exercise.duration * (0.6309*exercise.averageHrBpm!! + 0.1988*user.weight + 0.2017*user.getAge() - 55.0969) / 4.184).toFloat()
+    } else {
+        (exercise.duration * (0.4472*exercise.averageHrBpm!! + 0.1236*user.weight + 0.074*user.getAge() - 20.422) / 4.184).toFloat()
+    }
+}
+\end{lstlisting}
+
 \section{Supplemental Figures}
 \begin{figure}[H]
     \centering

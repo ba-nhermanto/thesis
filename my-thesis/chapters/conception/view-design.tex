@@ -1,7 +1,7 @@
 \subsection{View}
 \label{chap:view_design}
 The \emph{view}, which serves as the user interface, provides an interface for the user to interact with the application. The \emph{view} will be implemented as a graphical user interface (GUI) to enhance the user experience. 
-It is responsible for displaying the pre-defined functionalities in \autoref{chap:model_design}, allowing users to easily navigate and use the features provided by the application. 
+It is responsible for displaying the defined functionalities in \autoref{chap:model_design}, allowing users to easily navigate and use the features provided by the application. 
 Several mock-ups have been designed using the UI design tool UIzard\footnote{UIzard is a UI design tool used for designing wireframes, mockups, and prototypes. Homepage: \url{https://uizard.io/}} to provide a clearer visualization of the layout of the user interface.
 
 \subsubsection{HomeFragment}
@@ -23,7 +23,7 @@ As part of the real-time tracking and display of heart rate and current activity
     \item The \texttt{ConnectionService} is started.
     \item \texttt{HomeFragment} actively observes the heart rate live data from \texttt{HrViewModel}.
     \item \texttt{HomeFragment} actively observes the current activity live data from \texttt{HrViewModel}.
-    \item when the values from both the live data change, \texttt{HomeFragment} is notified.
+    \item When the values from both the live data are changed, \texttt{HomeFragment} is notified.
     \item \texttt{HomeFragment} updates the UI according to the data changes.
 
 \end{enumerate}
@@ -68,7 +68,7 @@ As part of calculating the energy expenditure, the \texttt{ExerciseFragment} fac
 \begin{enumerate}
     \item A button is pressed to start the exercise.
     \item A request to start the exercise is sent to the \texttt{ExerciseServiceManager}.
-    \item The \texttt{ExerciseService} is started.
+    \item The \texttt{ExerciseServiceManager} starts \texttt{ExerciseService}.
     \item \texttt{HomeFragment} actively observes the exercise live data from \texttt{ExerciseViewModel}.
     \item When the values from the live data change, \texttt{ExerciseFragment} is notified.
     \item \texttt{ExerciseFragment} updates the UI according to the data changes.
@@ -86,7 +86,7 @@ As part of calculating the energy expenditure, the \texttt{ExerciseFragment} fac
 \end{figure}
 
 \subsubsection{UserFragment}
-The \texttt{UserFragment} serves as the main component for managing user-related information. 
+The \texttt{UserFragment} serves as the main component for providing an interface for user-related information. 
 The \texttt{UserFragment} presents an overview of the user's data, allowing users to view and manage their data conveniently. 
 It offers an organized and user-friendly display, enabling users to access their profile and manage their data, including deleting their data.
 The user data is displayed in a user-friendly and editable format within a TextField as illustrated in \autoref{fig:userfragment_mockup}. This allows users to view and conveniently modify their data. 
@@ -117,8 +117,7 @@ As a result, the following sequence of operations is illustrated by \autoref{fig
     \label{fig:userfragment_add_new_user}
 \end{figure}
 
-To meet the requirement of deleting user data, the UserFragment is designed to handle this functionality. 
-To support this functionality, the following sequence of operation is implemented and visualized in \autoref{fig:userfragment_delete_user}:
+To meet the requirement of deleting user data, the \texttt{UserFragment} provides the following sequence of operation. It is visualized in \autoref{fig:userfragment_delete_user}:
 
 \begin{enumerate}
     \item A button to delete user is pressed.
@@ -127,6 +126,7 @@ To support this functionality, the following sequence of operation is implemente
     \item If the validation passed, the user will be deleted.
     \item The UI is updated, if there are still users left, the \texttt{UserFragment} displays the next user, otherwise it will show nothing.
 \end{enumerate}
+
 
 Alternate sequence:
 \begin{enumerate}[start=4]

@@ -24,8 +24,8 @@ This ensures that the code changes go through a standardized build and test proc
 \subsection{Database}
 In this project, Room is utilized as the database framework, which is based on SQLite. Room database is configured in kotlin as shown in \autoref{list:database_config}:
 \input{chapters/Implementation/listings/db-listing.tex}
-The database schema consists of three entities: user, exercise, and heartrate, each representing a distinct data model.
-These data access objects\footnote{\emph{Data Access Object (DAO)} serves as the main access point for interacting with the database. URL: \url{https://developer.android.com/training/data-storage/room/accessing-data}}: UserDao, ExerciseDao, heartrateDao, are configured, allowing interaction with the database. These DAOs define methods for querying data specific to each entities to the database.
+The database schema consists of three entities: \texttt{User}, \texttt{exercise}, and texttt{heartrate}, each representing a different data model.
+These data access objects\footnote{\emph{Data Access Object (DAO)} serves as the main access point for interacting with the database. URL: \url{https://developer.android.com/training/data-storage/room/accessing-data}}: \texttt{UserDao}, \texttt{ExerciseDao}, \texttt{HeartrateDao}, are configured, allowing interaction with the database. These DAOs define methods for querying data specific to each entities to the database.
 
 In addition, two TypeConverters, namely DateTypeConverter and TimestampTypeConverter, are implemented to handle conversions between complex data types like Date and Timestamp to their corresponding storage representations in the database.
 
@@ -33,7 +33,7 @@ Room features an auto-migration functionality, where it automatically handles sc
 But in case of a conflict between the versions of the database, a Migration SQL query must be defined, ensuring seamless migration of the database.
 
 \subsection{Dependency Injection}
-To handle the dependency injection in this project, Hilt\footnote{\emph{Hilt} is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in the project. Homepage: \url{https://developer.android.com/training/dependency-injection/hilt-android}} is used. 
+To handle the dependency injection in this project, Hilt\footnote{\emph{Hilt} is a dependency injection library for Android. Homepage: \url{https://developer.android.com/training/dependency-injection/hilt-android}} is used. 
 It enables the injection of DAOs into their respective repositories and repositories into their corresponding ViewModels and other components that required to interact with the database. 
 \begin{lstlisting}[caption={Dependency injection configuration (AppModule)}]
     @Singleton

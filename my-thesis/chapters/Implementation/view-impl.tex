@@ -36,7 +36,7 @@ Firstly, it provides a switch to control the connection to the heart rate sensor
 
 Moreover, the fragment displays the user's current heart rate (bpm) by observing the \texttt{currentHrBpm} LiveData from the \texttt{HrViewModel}. This ensures that the displayed heart rate is always up-to-date.
 Additionally, the \texttt{HomeFragment} shows the user's current activity intensity level by observing the \texttt{currentActivity} LiveData also provided by the \texttt{HrViewModel}. 
-\begin{lstlisting}[caption={Observers for currentActivity and currentHrBpm (HomeFragment)}]
+\begin{lstlisting}[caption={Observers for currentActivity and currentHrBpm (Kotlin - HomeFragment)}]
     private fun observeHrData() {
         hrViewModel.currentHrBpm.observe(viewLifecycleOwner) { newHrData ->
             binding.heartRate.text = newHrData.toString()
@@ -67,7 +67,7 @@ Lastly, the \texttt{HomeFragment} observes the current active user and dynamical
 
 \subsection{ExerciseFragment}
 The \texttt{ExerciseFragment} shows an overview of an ongoing exercise. It uses \texttt{DataBinding} to display the exercise details and observing the \texttt{currentExercise} LiveData from the \texttt{ExerciseViewModel}. 
-\begin{lstlisting}[caption={Observer for currentExercise (HomeFragment)}]
+\begin{lstlisting}[caption={Observer for currentExercise (Kotlin - HomeFragment)}]
 private fun observeAndUpdateExercise() {
     exerciseViewModel.currentExercise.observe(viewLifecycleOwner) { newExercise ->
         binding.includeExerciseStart.exercise = newExercise
@@ -81,8 +81,8 @@ This approach ensures that the exercise can be performed without any conflicting
 To ensure accurate data, the \texttt{ExerciseFragment} observes the current active user and adjusts the exercise information accordingly.
 
 Additionally, a separate fragment called \texttt{ExerciseListFragment} is created inside the \texttt{ExerciseFragment} to display a list of completed exercises. The \texttt{ExerciseFragment} observes \texttt{currentExerciseList} live data from the \texttt{ExerciseViewModel} to receive updates. 
-\texttt{RecyclerView}\footnote{\url{RecyclerView} is widget used for displaying sets of data efficiently. URL: \url{https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView}} widget is used to dynamically display the \texttt{currentExerciseList}. 
-\begin{lstlisting}[caption={Observer for currentExercise (HomeFragment)}]
+\texttt{RecyclerView}\footnote{\url{RecyclerView} is widget used for displaying sets of data efficiently. URL: \url{https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView}} widget is used to dynamically display the \texttt{currentExerciseList} in a scrollable view. 
+\begin{lstlisting}[caption={Observer for currentExercise (Kotlin - HomeFragment)}]
 private fun observeExerciseList() {
     exerciseViewModel.currentExercisesList.observe(viewLifecycleOwner) { newExercisesList ->
         initRecyclerView(newExercisesList)
@@ -99,7 +99,7 @@ private fun observeExerciseList() {
 \subsection{UserFragment}
 The \texttt{UserFragment} is responsible for displaying the details of the current active user. 
 To achieve this functionality, it observes the \texttt{currentUser} LiveData from the \texttt{UserViewModel} and bind it using \texttt{DataBinding}. 
-\begin{lstlisting}[caption={Observer for currentUser (UserFragment)}]
+\begin{lstlisting}[caption={Observer for currentUser (Kotlin - UserFragment)}]
 private fun observeActiveUser() {
     userViewModel.activeUser.observe(viewLifecycleOwner) { user ->
         binding.activeUser = user
@@ -110,7 +110,7 @@ The user information is displayed in text fields and a calendar is available to 
 Additionally, \texttt{UserFragment} provides three buttons for deleting, adding, and updating user data.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/userfragment-screenshot.png}
+    \includegraphics[width=0.4\textwidth]{images/userfragment-screenshot.png}
     \caption{Screenshot of UserFragment}
     \label{fig:userfragment_screenshot}
 \end{figure}
