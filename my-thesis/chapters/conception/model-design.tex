@@ -82,13 +82,11 @@ The following sequence is illustrated in \autoref{fig:start_exercise_diagram} an
     \item Heart rate event is retrieved.
     \item The \texttt{ExerciseService} processes active exercise. In this process, the attributes within the exercise such as average bpm and burned calories are calculated.
     \item The \texttt{ExerciseService} publishes an event containing the processed exercise.
-    \item The processed exercise is persisted to the database.
-    \item The persisted exercise is returned.
     \item A request to stop the exercise is received.
-    \item The active exercise is marked as done.
-    \item The \texttt{ExerciseService} publishes an event containing the completed exercise.
-    \item The completed exercise is persisted to the database.
+    \item The active exercise is marked as done and processed.
+    \item The completed exercise is persisted to the database by \texttt{ExerciseRepository}.
     \item The persisted exercise is returned.
+    \item The \texttt{ExerciseService} publishes an event containing the completed exercise.
 \end{enumerate}
 
 \begin{figure}[H]
