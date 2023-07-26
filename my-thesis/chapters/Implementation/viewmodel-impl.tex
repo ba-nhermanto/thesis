@@ -38,5 +38,5 @@ The \texttt{UserViewModel} provides \texttt{setActiveUser} function to mark a us
 The \texttt{UserViewModel} also provides \texttt{upsertUser} function. This function is responsible for updating an existing user or inserting a new user into the database. Once it is saved, it is marked automatically as the active user.
 Lastly, the \texttt{UserViewModel} provides \texttt{deleteUser} function to delete active user completely from the system.
 It checks if there are any running \texttt{ConnectionService} instances and also checks incomplete exercises. 
-It only proceeds with the deletion if the validation is passed. Additionally, if there are other users remaining, the function automatically sets the latest user as the active user. Otherwise, null will be set as the active user.
+It only proceeds with the deletion if the validation is successful. Additionally, if there are other users remaining, the function automatically sets the latest user as the active user. Otherwise, null will be set as the active user.
 

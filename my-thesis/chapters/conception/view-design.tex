@@ -69,7 +69,7 @@ As part of calculating the energy expenditure, the \texttt{ExerciseFragment} fac
     \item A button is pressed to start the exercise.
     \item A request to start the exercise is sent to the \texttt{ExerciseServiceManager}.
     \item The \texttt{ExerciseServiceManager} starts \texttt{ExerciseService}.
-    \item \texttt{HomeFragment} actively observes the exercise live data from \texttt{ExerciseViewModel}.
+    \item \texttt{ExerciseFragment} actively observes the exercise live data from \texttt{ExerciseViewModel}.
     \item When the values from the live data change, \texttt{ExerciseFragment} is notified.
     \item \texttt{ExerciseFragment} updates the UI according to the data changes.
     \item A button is pressed to stop the exercise.
@@ -80,7 +80,7 @@ As part of calculating the energy expenditure, the \texttt{ExerciseFragment} fac
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{images/exercise-fragment-mockup.png}
+    \includegraphics[width=0.6\textwidth]{images/exercise-fragment-mockup.png}
     \caption{ExerciseFragment mock-up}
     \label{fig:exercisefragment_mockup}
 \end{figure}
@@ -106,7 +106,7 @@ As a result, the following sequence of operations is illustrated by \autoref{fig
     \item A button to add new user or a button to update user is pressed.
     \item User data is retrieved from the input and validated.
     \item User data sent to \texttt{UserViewModel} to be persisted in the database.
-    \item Saved user is returned
+    \item Saved user is returned.
     \item The UI is updated according to the saved user.
 \end{enumerate}
 

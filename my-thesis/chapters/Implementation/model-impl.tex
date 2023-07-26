@@ -42,8 +42,8 @@ The implementation of the \verb;ConnectionService; follows the concept outlined 
 It is implemented as a \verb;Service; class\footnote{A \emph{Service} is an application component that can perform long-running operations in the background. URL: \url{https://developer.android.com/guide/components/services}}, allowing it to run in the background even when the application is not in the foreground.
 
 The lifecycle of the \verb;ConnectionService; is managed by \verb;ConnectionServiceManager;, which handles the start and stop operations. 
-\texttt{ConnectionServiceManager} sends the active user's device id to the \texttt{ConnectionService} by attaching it to the \texttt{Intent}\footnote{\emph{Intent} is used to start, stop, and communicate with \emph{Service}. URL: \url{https://developer.android.com/reference/android/content/Intent}} used to initiate the \texttt{ConnectionService},
-as the device id is required to start a connection to the heart rate sensor.
+\texttt{ConnectionServiceManager} passes the device id of the active user to the \texttt{ConnectionService} by including it to the \texttt{Intent}\footnote{\emph{Intent} is used to start, stop, and communicate with \emph{Service}. URL: \url{https://developer.android.com/reference/android/content/Intent}} used to initiate the \texttt{ConnectionService}.
+This device id is required to start a connection to the heart rate sensor.
 When the service starts, it automatically initiates the connection with the heart rate sensor.
 
 To establish the connection with the heart rate sensor, the \verb;ConnectionService; utilizes the PolarBleSdk library.
@@ -55,7 +55,7 @@ On the other hand, when the service is stopped by the \verb;ConnectionServiceMan
 The \verb;ActivityService; is implemented according to \autoref{chap:activity_monitor_design}.
 First, it listens to the \verb;HrEventBus;, which receives real-time heart rate data from the \verb;ConnectionService;. 
 By subscribing to the \verb;HrEventBus;, the \verb;ActivityService; receives the latest heart rate data.
-Every time heart rate data is received, this service determines the user's current activity according to \autoref{chap:activity_intensity}.
+Every time heart rate data is received, this service determines the intensity of the current activity according to \autoref{chap:activity_intensity}.
 Once the service has classified the intensity of the activity, the result will be published to \verb;ActivityEventBus;, allowing other components such as \verb;HrViewModel; to subscribe and receive the results.
 
 \subsubsection{Exercise Service}
@@ -69,4 +69,4 @@ Every time heart rate event is received, \verb;ExerciseService; adds the heart r
 Once the exercise is processed, it will be published to \verb;ExerciseEventBus;, which allows \verb;ExerciseViewModel; to be up-to-date with the active exercise.
 
 When the user stops the exercise, the service is stopped by \verb;ExerciseServiceManager;, then the service unsubscribes from the \verb;HeartrateEventBus;, mark the exercise as done, process and save the exercise to the database and once it is saved, it is published to \verb;ExerciseEventBus;.
-To prevent \url{ANR}\footnote{\emph{Android Not Responsive (ANR)} occurs when the main thread is blocked. URL: \url{https://developer.android.com/topic/performance/vitals/anr}}, the process to save the exercise to the database is executed on a \emph{coroutine}\footnote{A \emph{coroutine} is a concurrency design pattern that you can use on Android to simplify code that executes asynchronously. URL: \url{https://developer.android.com/kotlin/coroutines}}.
+To prevent \url{ANR}\footnote{\emph{Android Not Responsive (ANR)} occurs when the main thread is blocked. URL: \url{https://developer.android.com/topic/performance/vitals/anr}}, the process to save the exercise to the database is executed on a \emph{coroutine}\footnote{A \emph{coroutine} is a concurrency design pattern that can be used on Android to simplify code that executes asynchronously. URL: \url{https://developer.android.com/kotlin/coroutines}}.

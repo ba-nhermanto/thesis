@@ -28,7 +28,7 @@ The graph is controlled by another component called \texttt{GraphService} using 
 The \texttt{GraphService} subscribes to the \texttt{HrEventBus}, which broadcasts heart rate data events. 
 Whenever a heart rate data event is received, the \texttt{GraphService} updates the data set associated with the graph. 
 This ensures that the graph is continuously updated with the latest heart rate data.
-Additionally, the \texttt{GraphService} also reacts to changes in the active user. 
+Additionally, the \texttt{GraphService} also reacts to active user change. 
 When the active user is changed, the \texttt{GraphService} generates a new graph based on the heart rate data of the new active user. 
 
 Overall, the \texttt{HomeFragment} observes the current active user and dynamically updates the user interface to display the current heart rate, activity level, and the graph.
@@ -42,7 +42,7 @@ Overall, the \texttt{HomeFragment} observes the current active user and dynamica
 \subsection{ExerciseFragment}
 The \texttt{ExerciseFragment} shows an overview of an ongoing exercise. It uses \texttt{DataBinding} to display the exercise details and observing the \texttt{currentExercise} LiveData from the \texttt{ExerciseViewModel}. 
 The \texttt{ExerciseFragment} also offers buttons to start and stop an exercise session.
-Once the user presses the button to start an exercise session and the process is successfully started, the start button will be automatically disabled to prevent multiple start requests. Similarly, when the stop button is pressed, the stop button will also be disabled to avoid any unintended interruptions. 
+Once the user presses the button to start an exercise session and the session is successfully started, the start button will be automatically disabled to prevent multiple start requests. Similarly, when the stop button is pressed, the stop button will also be disabled to avoid any unintended interruptions. 
 This approach ensures that the exercise can be performed without any conflicting or overlapping commands.
 To ensure accurate data, the \texttt{ExerciseFragment} observes the current active user and adjusts the exercise information accordingly.
 

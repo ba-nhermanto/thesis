@@ -8,25 +8,25 @@ The Gradle Wrapper\footnote{\emph{Gradle Wrapper} is a script that runs Gradle c
 By using the script, tasks such as build, test, and run can be easily executed.
 
 \subsection{Code Style}
-This project follows the guidelines and conventions enforced by lint\footnote{\emph{lint} is the default code style checker in Android Studio for Kotlin. URL: \url{https://developer.android.com/studio/write/lint}}.
+This project follows the guidelines and conventions enforced by Lint\footnote{\emph{lint} is the default code style checker in Android Studio for Kotlin. URL: \url{https://developer.android.com/studio/write/lint}}.
 Lint enforces coding standards and helps identify code style violations, ensuring a cleaner code. 
 Additionally, the checkstyle runs automatically before each commit to ensure that the project follows to the coding conventions.
 
 \subsection{PolarBleSDK}
 \label{chap:polarblesdk}
-The application uses the PolarBle Software Development Kit (SDK)\footnote{\emph{PolarBleSDK} maintains bluetooth low energy connection for sensors made by Polar. Github repository: \url{https://github.com/polarofficial/polar-ble-sdk/}} to establish and maintain seamless connection between the heart rate sensor and the application.
+The application uses the PolarBle Software Development Kit (SDK)\footnote{\emph{PolarBleSDK} maintains bluetooth low energy connection for sensors made by Polar. Github repository: \url{https://github.com/polarofficial/polar-ble-sdk/}} to establish and maintain connection between the heart rate sensor and the application.
 Furthermore, the SDK provides tools and functionalities for data retrieval from the heart rate sensor.
 Additionally, PolarBleSDK is compatible with Polar heart rate monitor devices such as H10 and Verity Sense.
 
 \subsection{CI/CD}
 In this project, Github Actions\footnote{\emph{Github Action} is a CI/CD platform available for repositories hosted in Github. Homepage: \url{https://github.com/features/actions}} is utilized as the CI/CD tool. 
-The CI/CD pipeline is configured to be triggered automatically when there is a pull request to the main branch and when that branch is successfully merged. The configured CI/CD actions in this project is run test and build. 
+The CI/CD pipeline is configured to be triggered automatically when there is a pull request to the main branch and when the branch is successfully merged. The configured CI/CD actions in this project is run test and build. 
 This ensures that the code changes go through a standardized build and test process, maintaining the overall quality and stability of the project.
 
 \subsection{Database}
 In this project, Room is utilized as the database framework, which is based on SQLite.
 The database schema consists of three entities: \texttt{User}, \texttt{Exercise}, and \texttt{Heartrate}, each representing a different data model.
-These entities are accompanied with their own data access objects\footnote{\emph{Data Access Object (DAO)} serves as the main access point for interacting with the database. URL: \url{https://developer.android.com/training/data-storage/room/accessing-data}}: \texttt{UserDao}, \texttt{ExerciseDao}, \texttt{HeartrateDao}, which allow interaction with the database. These DAOs define methods for querying data specific to each entities to the database.
+These entities are accompanied with their own data access objects\footnote{\emph{Data Access Object (DAO)} serves as the main access point for interacting with the database. URL: \url{https://developer.android.com/training/data-storage/room/accessing-data}}: \texttt{UserDao}, \texttt{ExerciseDao}, and \texttt{HeartrateDao}, which allow interaction with the database. These DAOs define methods for querying data specific to each entities to the database.
 
 In addition, two TypeConverters, namely DateTypeConverter and TimestampTypeConverter, are implemented to handle conversions between complex data types like Date and Timestamp to their corresponding storage representations in the database.
 
