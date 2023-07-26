@@ -23,7 +23,7 @@ To provide the \texttt{HomeFragment} with the actual heart rate data, the follow
     \item The \texttt{HrViewModel} actively listens to events published by the \texttt{ConnectionService} to \texttt{HrEventBus}.
     \item Event containing heart rate data is retrieved.
     \item Heart rate from the event is extracted and sent to \texttt{HrRepository} to be persisted to the database.
-    \item Once the heart rate data is successfully saved, it is returned to \texttt{HrViewModel}
+    \item Once the heart rate data has successfully been saved, it will be returned to \texttt{HrViewModel}.
     \item \texttt{HrViewModel} updates the heart rate LiveData.
 \end{enumerate}
 
@@ -66,7 +66,7 @@ To support the \texttt{ExerciseFragment} with the actual exercise data, the foll
 The \texttt{UserViewModel} is responsible for managing business logics related to user within the application.
 It provides the necessary functionalities and data access methods to manage and manipulate user-related information. 
 The \texttt{UserViewModel} handles tasks such as adding a new user, updating user data, switching active user, and deleting a user, including all of their data.
-To support that functionalities, the \texttt{UserViewModel} maintains close connection to the repository to retrieve user data, update user information, and perform other user-related operations. 
+To support those functionalities, the \texttt{UserViewModel} maintains close connection to the repository to retrieve user data, update user information, and perform other user-related operations. 
 Additionally, to ensure that the \texttt{UserFragment} reflects the most up-to-date user information, the \texttt{UserViewModel} exposes active user LiveData and user list LiveData to the \texttt{UserFragment}.
 The active user LiveData contains information regarding the current active user, while the user list LiveData provides a list of available users in the database.
 

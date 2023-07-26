@@ -9,7 +9,7 @@ To gain a better overview and understanding of the entities inside the system, a
     \label{fig:entity_diagram}
 \end{figure}
 {{\ttfamily \hyphenchar\the\font=`\-}
-\autoref{fig:entity_diagram} visualizes the main entities and its relationship with each other inside the system. As illustrated by the diagram, the main entities in the system consist of \texttt{User}, \texttt{Exercise}, \texttt{Heartrate}. 
+\autoref{fig:entity_diagram} visualizes the main entities and its relationship with each other inside the system. As illustrated by the diagram, the main entities in the system consist of \texttt{User}, \texttt{Exercise}, and \texttt{Heartrate}. 
 Each \texttt{User} within the system has one to many relationship with both \texttt{Heartrate} and \texttt{Exercise} entities. These relationships represent the connection between a \texttt{User} and their corresponding \texttt{Heartrate} and \texttt{Exercise} records. 
 Once the entities have been defined, the system's functionalities can now be discussed based on the identified use cases.
 \par}
@@ -44,7 +44,7 @@ The following sequence is visualized in \autoref{fig:connection_diagram} and it 
 \label{chap:activity_monitor_design}
 Based on the analysis of the following user story, a system sequence that outlines the sequence of actions and interactions within the system can now be established.
 \begin{quotation}
-    \enquote{As an physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities.} 
+    \enquote{As a physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities.} 
 \end{quotation}
 
 \begin{figure}[H]
@@ -57,7 +57,7 @@ Based on the analysis of the following user story, a system sequence that outlin
 The following sequence in \autoref{fig:activity_diagram} illustrates the steps in monitoring the user's activity, which is one of the key use cases in the system:
 \begin{enumerate}
     \item The \texttt{ActivityService} actively listens to the heart rate event broadcasted by the \texttt{ConnectionService} to the \texttt{HrEventBus}.
-    \item Every time a heart rate event received, the \texttt{ActivityService} classifies the user's current activity based on the user's current heart rate by using the formula mentioned in \autoref{chap:activity_intensity}
+    \item Every time a heart rate event is received, the \texttt{ActivityService} classifies the user's current activity based on the user's current heart rate by using the formula mentioned in \autoref{chap:activity_intensity}
     \item Once the heart rate is classified, the service publishes an event containing the current activity.
 \end{enumerate}
 

@@ -19,7 +19,7 @@ Additionally, the option to permanently delete a user profile is available.
     \label{fig:add-new-user-screenshot}
 \end{figure}
 
-Once a user is successfully added and set active, a connection to the heart rate sensor can be established and heart rate streaming can be started.
+Once a user has been successfully added and set active, a connection to the heart rate sensor can be established and heart rate streaming can be started.
 Using the bottom navigation, navigate to the home and initiate connection and start heart rate streaming, by simply toggle the switch. 
 As the heart rate data is streamed, a dynamic graph will be displayed, providing a visual representation of the user's heart rate.
 Furthermore, the user's activity intensity level will be displayed.
@@ -44,8 +44,8 @@ To stop the exercise, simply press the stop button. Once an exercise is complete
 
 \section{Evaluation}
 The fulfillment of the requirements and standards outlined in \autoref{chap:requirements} should be used as an assessment metric to determine if the system and its functions have achieved their primary purpose in alignment with the goals of this thesis. 
-The execution of each user story detailed in \autoref{chap:use_case} is listed in \autoref{tab:user_story_and_assessment}.
-
+The implementation of each user story detailed in \autoref{chap:use_case} is listed in \autoref{tab:user_story_and_assessment}.
+\clearpage
 \begin{longtable}{p{0.5\textwidth} p{0.5\textwidth}}
     \label{tab:user_story_and_assessment}\\
 
@@ -55,7 +55,7 @@ The execution of each user story detailed in \autoref{chap:use_case} is listed i
         \hline
         As a health-oriented user, I want to monitor my cardiovascular activity. & Provides a functionality to control connection to the heart rate sensor and start heart rate data streaming. The received heart rate data is visualized in form of a line graph.\\
         \hline
-        As an physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities. & Processes the received heart rate data to show the intensity of the user's current activity and displays it on the user interface.\\    
+        As a physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities. & Processes the received heart rate data to show the intensity of the user's current activity and displays it on the user interface.\\    
         \hline
         As a fitness enthusiast, I want to know the number of calories burned in my exercises. This allows me to keep track of my progress and make adjustments to my exercises. & Provides a functionality to start and stop user exercise and the burned calories will be automatically calculated. The completed exercises are also displayed in the user interface.\\
         \hline
@@ -64,7 +64,7 @@ The execution of each user story detailed in \autoref{chap:use_case} is listed i
 \end{longtable}
 
 The implementation of Bluetooth Low Energy to establish connection between the application and the heart rate sensor ensures efficient battery usage while providing real-time streaming of heart rate data. 
-The application process the received heart rate data and transform it into an interactive line graph. 
+The application processes the received heart rate data and transforms it into an interactive line graph. 
 However, it would be beneficial to include time information in the graph to provide a clearer understanding of the heart rate history.
 
 Furthermore the application determines the user's physical activity intensity level based on the received heart rate data, allowing the users to monitor their activity intensity level.
@@ -76,6 +76,8 @@ From the user management perspective, the application provides users with full c
 This feature improves the overall user experience by providing control and ownership over their data.
 
 Additionally, the application should be assessed based on the standards described in \autoref{tab:qualitystandard} to determine the quality of the application.
+\newline
+\newline
 \begin{longtable}{p{0.2\textwidth} p{0.2\textwidth} p{0.5\textwidth}}
     \label{tab:qualitystandard_evaluation}\\
 

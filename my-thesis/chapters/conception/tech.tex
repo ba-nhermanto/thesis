@@ -2,7 +2,7 @@
 \label{chap:tech}
 This section provides an overview of the key technologies required to develop the application. 
 The goal of this phase is to find the most suitable technologies based on the goal of this project and preferences of the writer. 
-There are two dominant platforms to consider for this development: Android and iOS.
+There are two major platforms to consider for this development: Android and iOS.
 
 Several factors advocate for the choice of Android. 
 Firstly, Android has a larger user base \autocite{statcounter_os_market_share}, which implies the application would be accessible to a greater number of potential users. 
@@ -26,4 +26,4 @@ Furthermore, Kotlin provides pre-defined classes such as the \emph{Service}\foot
 A database is required to store and manage data. In the context of this project, ROOM\footnote{\emph{ROOM} is a persistence library that provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite. URL: \url{https://developer.android.com/jetpack/androidx/releases/room}} database, which is built on top of SQLite\footnote{\emph{SQLite} is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. Homepage: \url{https://www.sqlite.org/index.html}} has been selected as the application's database due to its official recommendation and integration with Android development.
 
 \subsection{BLE Sensor Device}
-Once all the technologies required to develop the application have been decided, the next step is to select a suitable heart-rate sensor device. Considering factors like accuracy, performance, and affordability, Polar H9\footnote{\emph{Polar H9} is a heart rate sensor made by Polar. Homepage: \url{https://www.polar.com/en/sensors/h9-heart-rate-sensor}} is chosen as the preferred device due to its affordability and reputation for providing reliable heart-rate measurements and long battery life.
+Once all the technologies required to develop the application have been decided, the next step is to select a suitable heart-rate sensor device. Considering factors like accuracy, performance, and affordability, Polar H9\footnote{\emph{Polar H9} is a heart rate sensor made by Polar. Homepage: \url{https://www.polar.com/en/sensors/h9-heart-rate-sensor}} is chosen as the preferred device due to its affordability and reputation for providing reliable heart-rate measurements and long battery life. Additionally, Polar provides a software development kit (SDK)\footnote{The SDK will be discussed in \autoref{chap:polarblesdk}} that simplifies the process of developing applications for polar heart rate sensors.
