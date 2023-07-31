@@ -18,8 +18,13 @@ The application uses the PolarBle Software Development Kit (SDK)\footnote{\emph{
 Furthermore, the SDK provides tools and functionalities for data retrieval from the heart rate sensor.
 Additionally, PolarBleSDK is compatible with Polar heart rate monitor devices such as H10 and Verity Sense.
 
+\subsection{Version Control}
+In this project, version control plays an important role in maintaining an organized and efficient development process. 
+Utilizing GitHub enables effective management of changes to the codebase, ensuring every modification was tracked and could be reverted if necessary.  
+Furthermore, GitHub provides additional tools and resources that could improve the overall development process such as GitHub Actions\footnote{\emph{GitHub Action} is a CI/CD platform available for repositories hosted in GitHub. Homepage: \url{https://github.com/features/actions}} which helps with the CI/CD pipelines. 
+
 \subsection{CI/CD}
-In this project, Github Actions\footnote{\emph{Github Action} is a CI/CD platform available for repositories hosted in Github. Homepage: \url{https://github.com/features/actions}} is utilized as the CI/CD tool. 
+In this project, GitHub Actions is utilized as the CI/CD tool. 
 The CI/CD pipeline is configured to be triggered automatically when there is a pull request to the main branch and when the branch is successfully merged. The configured CI/CD actions in this project is run test and build. 
 This ensures that the code changes go through a standardized build and test process, maintaining the overall quality and stability of the project.
 
@@ -32,6 +37,11 @@ In addition, two TypeConverters, namely DateTypeConverter and TimestampTypeConve
 
 Room features an auto-migration functionality, where it automatically handles schema changes and data migration whenever a new version of the database is detected without the need of migration queries.
 But in case of a conflict between the versions of the database, a SQL query for migration must be defined, ensuring seamless migration of the database.
+Throughout the development process, there have been three migrations that slightly altered the schema. The first migration addressed a non-optimal aspect of the initial schema, which did not allow for null values, leading to unwanted crashes. 
+The second migration involved the addition of an \emph{active} field to the \texttt{User} and a \emph{done} field to the \texttt{Exercise}, further refining the data structure to support the functionalities of the application.
+Lastly, the third migration introduced a \emph{userId} as a foreign key to both the \texttt{Heartrate} and \texttt{Exercise} entities to enable the use of the "on delete cascade" option. 
+This ensures that \texttt{Heartrate} and \texttt{Exercise} entries are automatically deleted when the corresponding user is removed, maintaining the integrity of the database.
+
 
 \subsection{Dependency Injection}
 To handle the dependency injection in this project, Hilt\footnote{\emph{Hilt} is a dependency injection library for Android. Homepage: \url{https://developer.android.com/training/dependency-injection/hilt-android}} is used. 

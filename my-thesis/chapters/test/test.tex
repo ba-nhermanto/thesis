@@ -32,15 +32,13 @@ Furthermore, the user's activity intensity level will be displayed.
 
 After the heart rate streaming has begun, an exercise can be started by navigating to the exercise page and pressing the start button.
 The application will then track the exercise progress, including calculating the calories burned. 
-To stop the exercise, simply press the stop button. Once an exercise is completed, it will be displayed below, providing a record of the user's workout history.
+To stop the exercise, simply press the stop button. Once an exercise is completed, it will be displayed as shown in \autoref{fig:exercise_screenshot}, providing a record of the user's workout history.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{images/exercise-tracking-sc.jpeg}
     \caption{Screenshot of exercise page, displaying user's exercise information}
     \label{fig:exercise_screenshot}
 \end{figure}
-
-
 
 \section{Evaluation}
 The fulfillment of the requirements and standards outlined in \autoref{chap:requirements} should be used as an assessment metric to determine if the system and its functions have achieved their primary purpose in alignment with the goals of this thesis. 
@@ -53,13 +51,13 @@ The implementation of each user story detailed in \autoref{chap:use_case} is lis
         \hline
         \textbf{User Story} & \textbf{Implementation} \\
         \hline
-        As a health-oriented user, I want to monitor my cardiovascular activity. & Provides a functionality to control connection to the heart rate sensor and start heart rate data streaming. The received heart rate data is visualized in form of a line graph.\\
+        As a health-oriented user, I want to monitor my cardiovascular activity so that I can stay informed about my physical wellbeing. & Provides a functionality to control connection to the heart rate sensor and start heart rate data streaming. The received heart rate data is visualized in form of a line graph.\\
         \hline
         As a physically active individuals, I want to track my current activity so that I can make adjustments to my physical activities. & Processes the received heart rate data to show the intensity of the user's current activity and displays it on the user interface.\\    
         \hline
-        As a fitness enthusiast, I want to know the number of calories burned in my exercises. This allows me to keep track of my progress and make adjustments to my exercises. & Provides a functionality to start and stop user exercise and the burned calories will be automatically calculated. The completed exercises are also displayed in the user interface.\\
+        As a fitness enthusiast, I want to know the number of calories burned in my exercises. This allows me to keep track of my progress and make adjustments to my exercises. & Provides a functionality to start and stop user's exercise and the burned calories will be automatically calculated. The completed exercises are also displayed in the user interface.\\
         \hline
-        As a user of the application who is concerned about data privacy, I want to be able to manage and control my user profile easily. & Provides an interface to add, update, and delete user data.\\
+        As a user of the application who is concerned about data privacy, I want full control of my data so that I can manage it easily.  & Provides an interface to add, update, and delete user data.\\
         \hline
 \end{longtable}
 
@@ -70,7 +68,7 @@ However, it would be beneficial to include time information in the graph to prov
 Furthermore the application determines the user's physical activity intensity level based on the received heart rate data, allowing the users to monitor their activity intensity level.
 
 Moreover, the exercise tracking feature provides user the ability to track their own exercise. The application displays the duration, heart rate information, time and calories burned during the exercise.
-However, the application might not provide the most precise estimation of calories burned during exercises as the formula used for the calculation is based on an article published in 2005\autocite{keytel2005energy}.     
+However, the application might not provide the most precise estimation of calories burned during exercises because the formula that is used for the calculation is based on an article published in 2005\autocite{keytel2005energy}.     
 
 From the user management perspective, the application provides users with full control over their own data, allowing them to add, update, and delete their own data.
 This feature improves the overall user experience by providing control and ownership over their data.
