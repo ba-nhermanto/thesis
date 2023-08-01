@@ -5,6 +5,7 @@ It is responsible for displaying the defined functionalities in \autoref{chap:mo
 Several mock-ups have been designed using the UI design tool UIzard\footnote{UIzard is a UI design tool used for designing wireframes, mockups, and prototypes. Homepage: \url{https://uizard.io/}} to provide a clearer visualization of the layout of the user interface.
 
 \subsubsection{HomeFragment}
+\label{chap:home_design}
 The \texttt{HomeFragment} serves as the main screen of the application, providing an overview of the user's health and activity-related functionalities defined in \autoref{chap:hr_monitor_design}. This \emph{view} consists of various components, including real-time heart rate display and activity monitor.
 The real-time heart rate display dynamically shows the user's live heart rate, allowing them to track their cardiovascular activity. Additionally, it features a dynamic graph that visualizes the user's heart rate history, which enables them to track their heart rate patterns over time.
 The activity monitor informs the user's current activity intensity based on their current heart rate, which enables them to track their activity intensity and adjust their current activity intensity according to their needs. As mentioned in \autoref{chap:activity_intensity}, the intensity levels range from very light, light, moderate, hard, and very hard.
@@ -53,9 +54,10 @@ The following sequence describes \autoref{fig:homefragment_stop_connection_diagr
 
 
 \subsubsection{ExerciseFragment}
+\label{chap:exercise_design}
 The \texttt{ExerciseFragment} serves as the main component for presenting exercise details and displaying the calculation of energy expenditure. 
 As visualized by \autoref{fig:exercisefragment_mockup}, it is designed to show an overview of the exercise, allowing users to access relevant information.
-The exercise displayed in the \texttt{ExerciseFragment} is connected to the \texttt{ExerciseLiveData} within the \texttt{ExerciseViewModel}. This connection is established through data binding\footnote{\emph{Data Binding} binds UI components in layouts to data sources in the app using a declarative format rather than programmatically. URL: \url{https://developer.android.com/topic/libraries/data-binding}}, ensuring automatic updates when the data changes. 
+The exercise displayed in the \texttt{ExerciseFragment} is connected to the \texttt{ExerciseLiveData} within the \texttt{ExerciseViewModel}. This connection is established through \texttt{DataBinding}\footnote{\emph{DataBinding} binds UI components in layouts to data sources in the app using a declarative format rather than programmatically. URL: \url{https://developer.android.com/topic/libraries/data-binding}}, ensuring automatic updates when the data changes. 
 As part of calculating the energy expenditure, the \texttt{ExerciseFragment} facilitates controls to start and stop the exercise so that the data can be captured effectively.
 \newline
 \begin{figure}[H]
@@ -86,6 +88,7 @@ As part of calculating the energy expenditure, the \texttt{ExerciseFragment} fac
 \end{figure}
 
 \subsubsection{UserFragment}
+\label{chap:user_design}
 The \texttt{UserFragment} serves as the main component for providing an interface for user-related information. 
 The \texttt{UserFragment} presents an overview of the user's data, allowing users to view and manage their data conveniently. 
 It offers an organized and user-friendly display, enabling users to access their profile and manage their data, including deleting their data.
