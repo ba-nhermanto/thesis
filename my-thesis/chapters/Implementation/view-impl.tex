@@ -86,7 +86,7 @@ Furthermore, a separate \texttt{UserListFragment} is implemented to display a li
 To keep the \texttt{UserListFragment} up-to-date with the latest users in the database, it observes the \texttt{users} LiveData from \texttt{UserViewModel}, which contains the actual list of all users in the database. 
 This ensures that the newest user is included in the list as soon as it is inserted. By using LiveData, the \texttt{UserListFragment} remains synchronized with the user data, providing a real-time view of all users.
 Similar to the \texttt{ExerciseListFragment}, it uses a \texttt{RecyclerView} to display a list of users. 
-Each user in the list is clickable, allowing the user to change the active user by selecting a different user from the list.
+Each user in the list is contained within a clickable card, allowing active user change by selecting a different user from the list.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{images/userlistfragment-screenshot.jpeg}

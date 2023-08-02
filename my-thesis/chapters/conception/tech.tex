@@ -6,13 +6,13 @@ There are two major platforms to consider for this development: Android and iOS.
 
 Several factors advocate for the choice of Android. 
 Firstly, Android has a larger user base \autocite{statcounter_os_market_share}, which implies the application would be accessible to a greater number of potential users. 
-Secondly, Android devices tend to be more affordable, which means the application could reach users from different economic backgrounds.
+Secondly, it is widely known that android devices tend to be more affordable, which means the application could reach users from different economic backgrounds.
 Additionally, Android offers a wide range of development tools and resources that could support the development process.
-Lastly, the fact that the writer already owns an Android device simplifies the testing and debugging process, making Android a sensible choice for the development platform of the application.
+Lastly, the fact that the writer already owns an android device simplifies the testing and debugging process by eliminating the need to acquire the device for testing purposes, making Android a sensible choice for the development platform of the application.
 
 Once the platform has been determined, the next step is to select the programming language to build the application.
 Android supports two major languages: Java and Kotlin. Given the real-time heart rate monitoring involved in this project, Kotlin, with its structured concurrency, becomes more favored. The capability to run multiple threads in parallel is ideal for real-time monitoring tasks.
-Moreover, Google supports Kotlin as the first-class language for Android Applications. This means that Kotlin has strong tooling support in Android Studio\footnote{\emph{Android Studio} is Google's official IDE for Android}. \autocite{kotlin_android}
+Moreover, Google supports Kotlin as the first-class language for Android Applications. This means that Kotlin has strong tooling support in Android Studio\footnote{\emph{Android Studio} is Google's official IDE for Android Development}. \autocite{kotlin_android}
 These factors make Kotlin a practical choice for developing the application.
 
 \subsection{User Interface}
@@ -26,4 +26,4 @@ Furthermore, Kotlin provides pre-defined classes such as the \emph{Service}\foot
 A database is required to store and manage data. In the context of this project, ROOM\footnote{\emph{ROOM} is a persistence library that provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite. URL: \url{https://developer.android.com/jetpack/androidx/releases/room}} database, which is built on top of SQLite\footnote{\emph{SQLite} is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine. Homepage: \url{https://www.sqlite.org/index.html}} has been selected as the application's database due to its official recommendation and integration with Android development.
 
 \subsection{BLE Sensor Device}
-Once all the technologies required to develop the application have been decided, the next step is to select a suitable heart-rate sensor device. Considering factors like accuracy, performance, and affordability, Polar H9\footnote{\emph{Polar H9} is a heart rate sensor made by Polar. Homepage: \url{https://www.polar.com/en/sensors/h9-heart-rate-sensor}} is chosen as the preferred device due to its affordability and reputation for providing reliable heart-rate measurements and long battery life. Additionally, Polar provides a software development kit (SDK)\footnote{The SDK will be discussed in \autoref{chap:polarblesdk}} that simplifies the process of developing applications for polar heart rate sensors.
+Once all the technologies required to develop the application have been decided, the next step is to select a suitable heart-rate sensor device. Considering factors like accuracy, performance, and affordability, Polar H9\footnote{\emph{Polar H9} is a heart rate sensor made by Polar. Homepage: \url{https://www.polar.com/en/sensors/h9-heart-rate-sensor}} is chosen as the preferred device due to its affordability and reputation for providing reliable heart-rate measurements and long battery life. Additionally, Polar provides a software development kit (SDK)\footnote{The SDK will be discussed in \autoref{chap:polarblesdk}} that simplifies the development process of the applications for polar heart rate sensors.

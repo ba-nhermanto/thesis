@@ -12,6 +12,18 @@ Health monitoring using wearable devices has gained immense popularity, enabling
 BLE offers real-time data exchange while consuming low power, which allows for long-term deployment without the need of frequent battery change. \cite{strey2013ble}
 Existing applications utilizing BLE offer a range of features and functionalities such as heart rate, calories burned, sleep patterns.
 
+According to Fourati and Said \autocite{chaari2020remote}, the general architecture of the remote health monitoring systems can be structured into three tiers.
+The first tier consists of wearable sensors attached to the human body and the gateway or coordinator. The communication between the sensor and the smartphone, which acts as the coordinator, takes place through BLE. In the first tier, the sensor transmits data to the smartphone via BLE.
+The second tier consists of the networking infrastructure, enabling connectivity between the smartphone and remote servers, as well as between the smartphone and the cloud. 
+Lastly, the third tier contains medical web servers for data visualization and a private cloud for secure data storage and processing. 
+\autoref{fig:3_tiers_arch} illustrates the three tiers architecture incorporating BLE.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{images/3-tiers-arch.png}
+  \caption{Remote healthcare monitoring system integrating BLE communication interfaces architecture; Source \autocite{chaari2020remote}}
+  \label{fig:3_tiers_arch}
+\end{figure}
+
 Nevertheless, the challenges remain in maintaining a straightforward application and ensuring users' privacy. The aim in this thesis is to explore the possibilities of improving health and wellbeing of the user by providing real-time data on their heart rate while providing users full control over their own data.
 By addressing these challenges, this thesis intends to develop a prototype of a more user- and privacy-friendly health activity monitor application using BLE.
 \newpage
