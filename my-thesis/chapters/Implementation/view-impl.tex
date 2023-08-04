@@ -42,6 +42,7 @@ Additionally, the \texttt{GraphService} also reacts to active user change.
 When the active user is changed, the \texttt{GraphService} generates a new graph based on the heart rate data of the new active user. 
 
 Overall, the \texttt{HomeFragment} observes the current active user and dynamically updates the user interface to display the current heart rate, activity level, and the graph.
+\autoref{fig:homefragment_screenshot} shows the final result of the implementation for \texttt{HomeFragment}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{images/homefragment-screenshot.png}
@@ -57,6 +58,7 @@ The \texttt{ExerciseFragment} also offers buttons to start and stop an exercise 
 Once the user presses the button to start an exercise session and the session is successfully started, the start button will be automatically disabled to prevent multiple start requests. Similarly, when the stop button is pressed, the stop button will also be disabled to avoid any unintended interruptions. 
 This approach ensures that the exercise can be performed without any conflicting or overlapping commands.
 To ensure accurate data, the \texttt{ExerciseFragment} observes the current active user and adjusts the exercise information accordingly.
+\autoref{fig:exercisefragment_screenshot} displays the final result of the implementation for the \texttt{ExerciseFragment}.
 
 Additionally, a separate fragment called \texttt{ExerciseListFragment} is created inside the \texttt{ExerciseFragment} to display a history of completed exercises, along with their detailed information, allowing users to track their progress over time. The \texttt{ExerciseFragment} observes \texttt{currentExerciseList} live data from the \texttt{ExerciseViewModel} to receive updates. 
 \texttt{RecyclerView}\footnote{\url{RecyclerView} is widget used for displaying sets of data efficiently. URL: \url{https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView}} widget is used to dynamically display the \texttt{currentExerciseList} in a scrollable view. 
@@ -75,6 +77,7 @@ The \texttt{UserFragment} is responsible for displaying the details of the curre
 To achieve this functionality, it observes the \texttt{currentUser} LiveData from the \texttt{UserViewModel} and bind it using \texttt{DataBinding}. 
 The user information is displayed in text fields and a calendar is available to support adding or editing the date of birth. 
 Additionally, \texttt{UserFragment} provides three buttons for deleting, adding, and updating user data. Similar to the buttons in the \texttt{ExerciseFragment}, they are also implemented using MaterialButton, allowing further color and shape customization to be more visually appealing.
+The final implementation of the \texttt{UserFragment} are displayed in \autoref{fig:userfragment_screenshot}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{images/userfragment-screenshot.png}
@@ -87,6 +90,7 @@ To keep the \texttt{UserListFragment} up-to-date with the latest users in the da
 This ensures that the newest user is included in the list as soon as it is inserted. By using LiveData, the \texttt{UserListFragment} remains synchronized with the user data, providing a real-time view of all users.
 Similar to the \texttt{ExerciseListFragment}, it uses a \texttt{RecyclerView} to display a list of users. 
 Each user in the list is contained within a clickable card, allowing active user change by selecting a different user from the list.
+\autoref{fig:userlistfragment} illustrates the final result of the implementation for the \texttt{UserListFragment}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{images/userlistfragment-screenshot.jpeg}

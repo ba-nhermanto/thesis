@@ -5,7 +5,7 @@ The goal of this phase is to find the most suitable technologies based on the go
 There are two major platforms to consider for this development: Android and iOS.
 
 Several factors advocate for the choice of Android. 
-Firstly, Android has a larger user base \autocite{statcounter_os_market_share}, which implies the application would be accessible to a greater number of potential users. 
+Firstly, Android has a larger user base \autocite{statcounter_os_market_share}, which means the application would be accessible to a greater number of potential users. 
 Secondly, it is widely known that android devices tend to be more affordable, which means the application could reach users from different economic backgrounds.
 Additionally, Android offers a wide range of development tools and resources that could support the development process.
 Lastly, the fact that the writer already owns an android device simplifies the testing and debugging process by eliminating the need to acquire the device for testing purposes, making Android a sensible choice for the development platform of the application.
@@ -17,7 +17,7 @@ These factors make Kotlin a practical choice for developing the application.
 
 \subsection{User Interface}
 As the main development platform for this project is Android Kotlin, the user interface is designed and implemented using a combination of Kotlin and XML with the help of Material Design\footnote{\emph{Material Design} is a design language developed by Google. Homepage: \url{https://m2.material.io/develop/android}}.
-Implementing a graph to display live heart rate data can be advantageous to the user. Therefore, for smooth and appealing visualization, MPAndroidChart\footnote{\emph{MPAndroidChart} is a chart library for Android, designed for generating interactive and dynamic charts. Github repository: \url{https://github.com/PhilJay/MPAndroidChart}} is used to help with the graph implementation due to its wide collection of charts. Additionally, it also supports dynamic graph, allowing real-time data visualization.
+Implementing a graph to display live heart rate data would be advantageous to the user. Therefore, for smooth and appealing visualization, MPAndroidChart\footnote{\emph{MPAndroidChart} is a chart library for Android, designed for generating interactive and dynamic charts. Github repository: \url{https://github.com/PhilJay/MPAndroidChart}} is used to help with the graph implementation due to its wide collection of charts. Additionally, it also supports dynamic graph, allowing real-time data visualization.
 \subsection{Backend Infrastructure}
 The backend of the application is developed using Kotlin with Android Jetpack\footnote{\emph{Jetpack} is a suite of libraries, tools, and guidance to help developers write apps easier. URL: \url{https://developer.android.com/jetpack}} due to its compatibility with the MVVM architecture. 
 Furthermore, Kotlin provides pre-defined classes such as the \emph{Service}\footnote{Based on The Official Android Documentation, \emph{Service} is an application component that can perform long-running operations in the background.\autocite{android-services}} class, which enables smooth execution of long running task. In the scope of this project, \emph{Service} class is especially useful to implement the \texttt{ConnectionService} and \texttt{ExerciseService}.
